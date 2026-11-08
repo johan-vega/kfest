@@ -1,83 +1,2033 @@
 /* =====================================================
-   KFEST — GLOBAL DESIGN SYSTEM
-   Fuentes: Playfair Display · Cormorant Garamond · Inter
+  KFEST — LUXURY GLOBAL DESIGN SYSTEM
+  Fuentes: Playfair Display · Cormorant Garamond · Inter
    ===================================================== */
 
-/* --- VARIABLES (MODO OSCURO POR DEFECTO) --- */
 :root {
-  --ff-serif:  'Playfair Display', Georgia, serif;
+  --ff-serif: 'Playfair Display', Georgia, serif;
   --ff-script: 'Cormorant Garamond', Georgia, serif;
-  --ff-sans:   'Inter', system-ui, sans-serif;
+  --ff-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --bg0: #0d0b09;
-  --bg0-rgb: 13, 11, 9;
-  --bg1: #181410;
-  --bg2: #231e18;
-  --bg3: #2e271f;
+  /* Deep Cacao Velvet Backgrounds */
+  --bg0: #090705;
+  --bg0-rgb: 9, 7, 5;
+  --bg1: #120e0a;
+  --bg2: #1a140f;
+  --bg3: #241c14;
+  --bg4: #2f251b;
 
-  --gold:       #e6ca85;
-  --gold-lt:    #f2e3b6;
-  --gold-dk:    #b88a44;
-  --gold-grad:  linear-gradient(135deg, #f2e3b6 0%, #e6ca85 55%, #b88a44 100%);
-  --gold-bdr:   rgba(230,202,133,.38);
-  --gold-glow:  0 0 32px rgba(230,202,133,.28);
+  /* Pure Gold & Metallic Gradients */
+  --gold: #e6ca85;
+  --gold-lt: #faefcf;
+  --gold-dk: #b88a44;
+  --gold-grad: linear-gradient(135deg, #f7e7c4 0%, #e6ca85 45%, #b88a44 100%);
+  --gold-grad-rev: linear-gradient(135deg, #b88a44 0%, #e6ca85 55%, #f7e7c4 100%);
+  --gold-foil: linear-gradient(120deg, #d4a962 0%, #f7e7c4 25%, #b88a44 50%, #fcf4de 75%, #a87930 100%);
+  --gold-bdr: rgba(230, 202, 133, 0.28);
+  --gold-bdr-hi: rgba(230, 202, 133, 0.55);
+  --gold-glow: 0 0 36px rgba(230, 202, 133, 0.28);
+  --gold-glow-lg: 0 0 60px rgba(230, 202, 133, 0.35);
 
-  --text0: #f7f4ee;
-  --text1: #d4c4aa;
-  --text2: #9a8c7a;
+  /* Typography Colors */
+  --text0: #fbf9f5;
+  --text1: #dfd3c0;
+  --text2: #a59784;
+  --text3: #6d6152;
 
-  --bdr:  rgba(255,255,255,.12);
+  /* Borders & Glassmorphism */
+  --bdr: rgba(255, 255, 255, 0.08);
+  --bdr-light: rgba(255, 255, 255, 0.14);
+  --glass-bg: rgba(18, 14, 10, 0.76);
+  --glass-bdr: rgba(230, 202, 133, 0.22);
+  --glass-shd: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(230, 202, 133, 0.12) inset;
 
-  --r-sm: 6px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 24px;
+  /* Radius Tokens */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-full: 9999px;
 
-  --ease: all .28s cubic-bezier(.25,.8,.25,1);
-}
-
-/* --- TEMA CLARO --- */
-body.light-theme { 
-  --bg0:#faf7f2; 
-  --bg0-rgb: 250, 247, 242;
-  --bg1:#f0e9dc; 
-  --bg2:#ffffff; 
-  --bg3:#f4ede0;
-  --gold:#b88a44; 
-  --gold-lt:#d4a962; 
-  --gold-dk:#7a5a20;
-  --gold-grad:linear-gradient(135deg,#d4a962 0%,#b88a44 55%,#7a5a20 100%);
-  --gold-bdr:rgba(184,138,68,.3); 
-  --gold-glow:0 0 22px rgba(184,138,68,.15);
-  --text0:#1c1813; 
-  --text1:#5c4f3d; 
-  --text2:#9a8a78; 
-  --bdr:rgba(0,0,0,.07); 
+  /* Animations & Transitions */
+  --ease: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* --- RESET BASE --- */
-*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-html { 
-  scroll-behavior:smooth; 
-  font-family:var(--ff-sans); 
-  background:var(--bg0); 
-  color:var(--text0); 
-  font-size:16px; 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-html, body {
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+  font-family: var(--ff-sans);
+  background: var(--bg0);
+  color: var(--text0);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
   min-height: 100%;
 }
-body { 
-  background:var(--bg0); 
-  color:var(--text0); 
-  overflow-x:hidden; 
-  line-height:1.65; 
-}
-a { color:inherit; text-decoration:none; }
-button { cursor:pointer; border:none; background:none; font-family:inherit; color:inherit; }
-img { display:block; max-width:100%; }
 
-.container { max-width:1260px; margin:0 auto; padding:0 28px; }
-.sec-pad { padding:96px 0; }
-.section-dark  { background:var(--bg0); }
-.section-brown { background:var(--bg1); }
+body {
+  background: var(--bg0);
+  color: var(--text0);
+  overflow-x: hidden;
+  line-height: 1.65;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(230, 202, 133, 0.08), transparent 70%),
+    radial-gradient(circle at 100% 40%, rgba(184, 138, 68, 0.04), transparent 40%),
+    radial-gradient(circle at 0% 80%, rgba(184, 138, 68, 0.04), transparent 40%);
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg3);
+  border-radius: var(--r-full);
+  border: 2px solid var(--bg0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dk);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.sec-pad {
+  padding: 110px 0;
+  position: relative;
+}
+
+.section-dark {
+  background: var(--bg0);
+  position: relative;
+}
+
+.section-brown {
+  background: linear-gradient(180deg, var(--bg1) 0%, #17110c 100%);
+  position: relative;
+}
+
+/* Ambient glow accents */
+.section-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-bdr-hi), transparent);
+}
+
+/* =====================================================
+   MODO CLARO CÁLIDO (COLOR CREMA ARTESANAL / PERGAMINO)
+   Color crema cálido, elegante y tostado — NO blanco puro
+   ===================================================== */
+body.light-theme {
+  --bg0: #f6f1e8; /* Crema artesanal suave */
+  --bg0-rgb: 246, 241, 232;
+  --bg1: #ece4d4; /* Crema tostado pergamino */
+  --bg2: #fbf8f2; /* Crema seda para tarjetas */
+  --bg3: #e2d7c3; /* Crema café con leche */
+  --bg4: #d6c9b3;
+
+  /* Tipografía en café tostado oscuro */
+  --text0: #2b180d; /* Café tostado profundo */
+  --text1: #4a3322; /* Tono café con cuerpo */
+  --text2: #7a614d; /* Canela y avellana tostada */
+  --text3: #9e8773;
+
+  /* Oro cálido tostado */
+  --gold: #a67324;
+  --gold-lt: #c48e3a;
+  --gold-dk: #754f15;
+  --gold-grad: linear-gradient(135deg, #d49f48 0%, #a67324 55%, #754f15 100%);
+  --gold-grad-rev: linear-gradient(135deg, #754f15 0%, #a67324 55%, #d49f48 100%);
+  --gold-bdr: rgba(166, 115, 36, 0.32);
+  --gold-bdr-hi: rgba(166, 115, 36, 0.6);
+  --gold-glow: 0 0 32px rgba(166, 115, 36, 0.22);
+  --gold-glow-lg: 0 0 50px rgba(166, 115, 36, 0.3);
+
+  /* Bordes suaves de café */
+  --bdr: rgba(74, 51, 34, 0.12);
+  --bdr-light: rgba(74, 51, 34, 0.18);
+  --glass-bg: rgba(246, 241, 232, 0.88);
+  --glass-bdr: rgba(166, 115, 36, 0.25);
+  --glass-shd: 0 12px 32px rgba(74, 51, 34, 0.08), 0 0 0 1px rgba(166, 115, 36, 0.15) inset;
+}
+
+body.light-theme .section-brown,
+body.light-theme section#contacto.section-brown {
+  background: #ece4d4 !important;
+  background-image: linear-gradient(
+    180deg,
+    #f6f1e8 0%,
+    #ece4d4 100%
+  ) !important;
+  color: #2b180d !important;
+}
+
+
+/* =====================================================
+   KFEST — AJUSTES FINALES DEL TEMA CREMA
+   ===================================================== */
+
+/* El fondo del documento también debe cambiar de tema */
+html.light-theme {
+  background-color: #f6f1e8;
+  color: #2b180d;
+}
+
+/* Fondo crema con reflejos cálidos, sin halos oscuros */
+body.light-theme {
+  background-color: var(--bg0);
+  color: var(--text0);
+  background-image:
+    radial-gradient(
+      ellipse 80% 45% at 50% -15%,
+      rgba(166, 115, 36, 0.09),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at 100% 40%,
+      rgba(184, 138, 68, 0.035),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 0% 80%,
+      rgba(184, 138, 68, 0.035),
+      transparent 42%
+    );
+}
+
+/* Scrollbar coherente con la paleta crema */
+html.light-theme ::-webkit-scrollbar-track {
+  background: #f6f1e8;
+}
+
+html.light-theme ::-webkit-scrollbar-thumb {
+  background: #d6c9b3;
+  border-color: #f6f1e8;
+}
+
+html.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: #a67324;
+}
+
+/* Transición suave entre temas */
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* =========================================================
+   KFEST — TARJETAS ADAPTABLES AL TEMA CLARO
+   Estos estilos van en src/styles.css (archivo global).
+   ========================================================= */
+
+body.light-theme .lot-card,
+body.light-theme .team-card,
+body.light-theme .prod-card,
+body.light-theme .delivery-card,
+body.light-theme .profile-card,
+body.light-theme .util-card,
+body.light-theme .car-card,
+body.light-theme .official-card,
+body.light-theme .trace-card,
+body.light-theme .quiz-card,
+body.light-theme .quiz-cat-card,
+body.light-theme .quiz-coffee-card,
+body.light-theme .result-breakdown-card,
+body.light-theme .brew-card,
+body.light-theme .brew-metric-card,
+body.light-theme .brew-tip-box,
+body.light-theme .coffee-card-notes {
+  background: #fffdf8 !important;
+  color: #2b180d !important;
+  border-color: rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 8px 26px rgba(74, 51, 34, 0.09) !important;
+}
+
+/* Tarjetas seleccionadas e interacciones */
+body.light-theme .quiz-coffee-card.card-selected,
+body.light-theme .quiz-cat-card:hover,
+body.light-theme .prod-card:hover,
+body.light-theme .profile-card:hover,
+body.light-theme .team-card:hover,
+body.light-theme .util-card:hover,
+body.light-theme .car-card:hover {
+  background: #ffffff !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 12px 30px rgba(166, 115, 36, 0.16) !important;
+}
+
+/* Textos principales dentro de las tarjetas */
+body.light-theme .team-name,
+body.light-theme .prod-name,
+body.light-theme .profile-card h3,
+body.light-theme .car-card strong,
+body.light-theme .official-card .phone-main,
+body.light-theme .official-card .phone-sec,
+body.light-theme .coffee-card-title,
+body.light-theme .cat-card-body strong,
+body.light-theme .metric-val {
+  color: #2b180d !important;
+}
+
+/* Descripciones y textos secundarios */
+body.light-theme .team-bio,
+body.light-theme .prod-desc,
+body.light-theme .profile-desc,
+body.light-theme .coffee-card-desc,
+body.light-theme .coffee-card-notes span,
+body.light-theme .cat-card-body p,
+body.light-theme .metric-sub,
+body.light-theme .tip-text p {
+  color: #6b5542 !important;
+}
+
+/* Mantener los detalles de marca en dorado */
+body.light-theme .team-role,
+body.light-theme .prod-cat,
+body.light-theme .prod-price strong.text-gold,
+body.light-theme .profile-price-row strong,
+body.light-theme .car-card small,
+body.light-theme .card-lbl,
+body.light-theme .coffee-card-notes small {
+  color: #94651c !important;
+}
+
+/* Divisiones internas de las tarjetas */
+body.light-theme .card-hr,
+body.light-theme .prod-footer,
+body.light-theme .profile-price-row {
+  border-color: rgba(74, 51, 34, 0.15) !important;
+}
+
+/* Elementos interiores que necesitan un fondo propio */
+body.light-theme .prod-img-area,
+body.light-theme .team-img-wrap {
+  background-color: #f1e8d9;
+}
+
+
+/* =========================================================
+   KFEST — NAVBAR Y FOOTER EN MODO CLARO
+   Estilos globales: src/styles.css
+   ========================================================= */
+
+/* NAVBAR */
+body.light-theme .navbar {
+  background: rgba(246, 241, 232, 0.96) !important;
+  border-bottom: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 4px 18px rgba(74, 51, 34, 0.06);
+}
+
+body.light-theme .navbar .nav-link {
+  color: #59412d !important;
+}
+
+body.light-theme .navbar .nav-link:hover,
+body.light-theme .navbar .nav-link.active {
+  color: #94651c !important;
+}
+
+body.light-theme .navbar .brand-copy strong {
+  color: #94651c !important;
+}
+
+body.light-theme .navbar .brand-copy span {
+  color: #7a614d !important;
+}
+
+body.light-theme .navbar .theme-toggle-btn,
+body.light-theme .navbar .mobile-toggle {
+  color: #4a3322 !important;
+}
+
+/* Selector de idioma */
+body.light-theme .navbar .lang-pill {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.28) !important;
+}
+
+body.light-theme .navbar .lang-pill button {
+  color: #59412d !important;
+}
+
+body.light-theme .navbar .lang-pill button.lang-active {
+  color: #94651c !important;
+}
+
+/* Menú desplegable en móviles */
+@media (max-width: 880px) {
+  body.light-theme .navbar .nav-links {
+    background: rgba(246, 241, 232, 0.99) !important;
+    border-bottom: 1px solid rgba(166, 115, 36, 0.24) !important;
+    box-shadow: 0 12px 24px rgba(74, 51, 34, 0.08);
+  }
+
+  body.light-theme .navbar .nav-links .nav-link {
+    color: #59412d !important;
+  }
+
+  body.light-theme .navbar .nav-links .nav-link:hover,
+  body.light-theme .navbar .nav-links .nav-link.active {
+    color: #94651c !important;
+  }
+}
+
+/* FOOTER: fondo, borde y texto general */
+body.light-theme .footer {
+  background: linear-gradient(180deg, #ece4d4 0%, #e2d7c3 100%) !important;
+  border-top: 1px solid rgba(166, 115, 36, 0.24) !important;
+  color: #4a3322 !important;
+}
+
+body.light-theme .footer .footer-desc,
+body.light-theme .footer .community-sub,
+body.light-theme .footer .footer-col span {
+  color: #6b5542 !important;
+}
+
+body.light-theme .footer .footer-col h4 {
+  color: #94651c !important;
+}
+
+body.light-theme .footer .footer-col a:not(.soc-btn) {
+  color: #59412d !important;
+}
+
+body.light-theme .footer .footer-col a:not(.soc-btn):hover,
+body.light-theme .footer .legal-links a:hover {
+  color: #94651c !important;
+}
+
+/* Recuadros interiores del footer */
+body.light-theme .footer .faith-box,
+body.light-theme .footer .denomination {
+  background: rgba(255, 253, 248, 0.85) !important;
+  border-color: rgba(166, 115, 36, 0.22) !important;
+}
+
+body.light-theme .footer .faith-box em {
+  color: #94651c !important;
+}
+
+body.light-theme .footer .faith-box strong,
+body.light-theme .footer .denomination strong {
+  color: #6b5542 !important;
+}
+
+/* Botones de redes sociales */
+body.light-theme .footer .social-row .soc-btn {
+  background: #fffdf8 !important;
+  color: #94651c !important;
+  border-color: rgba(166, 115, 36, 0.28) !important;
+}
+
+body.light-theme .footer .social-row .soc-btn:hover {
+  background: #a67324 !important;
+  color: #ffffff !important;
+  border-color: #a67324 !important;
+}
+
+/* Franja inferior y enlaces legales */
+body.light-theme .footer .footer-bar {
+  border-top-color: rgba(74, 51, 34, 0.18) !important;
+  color: #6b5542 !important;
+}
+
+body.light-theme .footer .legal-links a {
+  color: #6b5542 !important;
+}
+
+/* =========================================================
+   KFEST — RESEÑAS, FAQ Y CONTACTO EN MODO CLARO
+   Añadir al final de src/styles.css
+   ========================================================= */
+
+
+/* ===================== RESEÑAS ===================== */
+
+body.light-theme .test-section {
+  background: linear-gradient(
+    180deg,
+    #f6f1e8 0%,
+    #efe6d7 100%
+  ) !important;
+}
+
+body.light-theme .test-section .test-badge {
+  background: rgba(255, 253, 248, 0.8);
+  border-color: rgba(166, 115, 36, 0.25);
+  color: #94651c;
+}
+
+body.light-theme .test-section .test-slider-card {
+  background: #fffdf8 !important;
+  color: #2b180d !important;
+  border: 1px solid rgba(166, 115, 36, 0.25) !important;
+  box-shadow: 0 12px 32px rgba(74, 51, 34, 0.10) !important;
+}
+
+body.light-theme .test-section .test-card-inner {
+  background: transparent !important;
+}
+
+body.light-theme .test-section .test-quote {
+  color: #4a3322 !important;
+}
+
+body.light-theme .test-section .author-name {
+  color: #2b180d !important;
+}
+
+body.light-theme .test-section .author-role,
+body.light-theme .test-section .author-city {
+  color: #6b5542 !important;
+}
+
+body.light-theme .test-section .author-favorite {
+  background: #f4ead8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.20);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+body.light-theme .test-section .author-favorite small {
+  color: #94651c !important;
+}
+
+body.light-theme .test-section .author-favorite span {
+  color: #4a3322 !important;
+}
+
+body.light-theme .test-section .test-pill {
+  background: #f3e6cb !important;
+  color: #805513 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme .test-section .test-controls {
+  border-top-color: rgba(74, 51, 34, 0.14) !important;
+}
+
+body.light-theme .test-section .test-btn-nav {
+  background: #f3e8d6 !important;
+  color: #805513 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme .test-section .test-btn-nav:hover {
+  background: #a67324 !important;
+  color: #ffffff !important;
+}
+
+body.light-theme .test-section .test-dot {
+  background: #cbb99d !important;
+}
+
+body.light-theme .test-section .test-dot.active {
+  background: #a67324 !important;
+}
+
+
+/* ===================== PREGUNTAS FRECUENTES ===================== */
+
+body.light-theme #faq {
+  background: #ece4d4 !important;
+  color: #2b180d !important;
+}
+
+body.light-theme #faq .faq-badge {
+  background: rgba(255, 253, 248, 0.75);
+  border-color: rgba(166, 115, 36, 0.25);
+  color: #94651c !important;
+}
+
+body.light-theme #faq .faq-item {
+  background: #fffdf8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.22) !important;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 16px rgba(74, 51, 34, 0.05);
+}
+
+body.light-theme #faq .faq-question-btn {
+  background: transparent !important;
+  color: #2b180d !important;
+}
+
+body.light-theme #faq .faq-question-btn:hover,
+body.light-theme #faq .faq-item.faq-open .faq-question-btn {
+  background: #f7f0e4 !important;
+}
+
+body.light-theme #faq .faq-category {
+  color: #94651c !important;
+}
+
+body.light-theme #faq .faq-question {
+  color: #2b180d !important;
+}
+
+body.light-theme #faq .faq-chevron {
+  color: #94651c !important;
+}
+
+body.light-theme #faq .faq-answer-panel {
+  background: #fffdf8 !important;
+  border-top: 1px solid rgba(74, 51, 34, 0.12);
+}
+
+body.light-theme #faq .faq-answer-panel p {
+  color: #6b5542 !important;
+}
+
+body.light-theme #faq .faq-footer-note {
+  color: #59412d !important;
+}
+
+body.light-theme #faq .faq-whatsapp-link {
+  color: #805513 !important;
+}
+
+body.light-theme #faq .faq-whatsapp-link:hover {
+  color: #a67324 !important;
+}
+
+
+/* ===================== CONTACTO / CONCIERGE ===================== */
+
+body.light-theme #contacto {
+  background: linear-gradient(
+    135deg,
+    #f6f1e8 0%,
+    #ece4d4 100%
+  ) !important;
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .eyebrow {
+  color: #94651c !important;
+}
+
+body.light-theme #contacto .sec-title {
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .concierge-desc {
+  color: #6b5542 !important;
+}
+
+body.light-theme #contacto .resp-tag {
+  color: #6b5542 !important;
+}
+
+body.light-theme #contacto .hashtags span {
+  color: #805513 !important;
+  background: rgba(255, 253, 248, 0.8);
+  border-color: rgba(166, 115, 36, 0.22) !important;
+}
+
+/* Tarjeta de horarios y datos oficiales */
+body.light-theme #contacto .official-card {
+  background: #fffdf8 !important;
+  color: #4a3322 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+  box-shadow: 0 12px 30px rgba(74, 51, 34, 0.09) !important;
+}
+
+body.light-theme #contacto .official-card .card-lbl {
+  color: #94651c !important;
+}
+
+body.light-theme #contacto .official-card .phone-main,
+body.light-theme #contacto .official-card .phone-sec,
+body.light-theme #contacto .official-card .email {
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .official-card .card-hr {
+  border-color: rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme #contacto .official-card .verse {
+  color: #6b5542 !important;
+}
+
+body.light-theme #contacto .official-card .verse-ref {
+  color: #94651c !important;
+}
+
+/* Botón de WhatsApp */
+body.light-theme #contacto .concierge-cta .btn-gold {
+  background: #a67324 !important;
+  color: #ffffff !important;
+  border-color: #a67324 !important;
+}
+
+body.light-theme #contacto .concierge-cta .btn-gold:hover {
+  background: #805513 !important;
+  color: #ffffff !important;
+  border-color: #805513 !important;
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+  body.light-theme .test-section .test-slider-card {
+    padding: 24px 18px !important;
+  }
+
+  body.light-theme #contacto .concierge-cta .btn-gold {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+/* =========================================================
+   KFEST — HERO / INICIO EN MODO CLARO
+   ========================================================= */
+
+body.light-theme #inicio.hero {
+  background: #f6f1e8 !important;
+  color: #2b180d !important;
+}
+
+/* Fotografía y superposición */
+body.light-theme #inicio .hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(246, 241, 232, 0.97) 0%,
+    rgba(246, 241, 232, 0.90) 43%,
+    rgba(246, 241, 232, 0.66) 72%,
+    rgba(246, 241, 232, 0.48) 100%
+  ) !important;
+}
+
+/* Etiqueta de cosecha */
+body.light-theme #inicio .badge-capsule {
+  background: rgba(255, 253, 248, 0.88) !important;
+  color: #805513 !important;
+  border: 1px solid rgba(166, 115, 36, 0.30) !important;
+  box-shadow: 0 4px 14px rgba(74, 51, 34, 0.05);
+}
+
+body.light-theme #inicio .badge-dot {
+  color: #a67324 !important;
+}
+
+/* Textos principales */
+body.light-theme #inicio .eyebrow {
+  color: #94651c !important;
+}
+
+body.light-theme #inicio .hero-title {
+  color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+body.light-theme #inicio .hero-script {
+  color: #94651c !important;
+  text-shadow: none !important;
+}
+
+body.light-theme #inicio .hero-desc-card {
+  background: rgba(255, 253, 248, 0.86) !important;
+  border: 1px solid rgba(166, 115, 36, 0.20) !important;
+  border-left: 3px solid #a67324 !important;
+  box-shadow: 0 8px 24px rgba(74, 51, 34, 0.06) !important;
+}
+
+body.light-theme #inicio .hero-desc-card p {
+  color: #59412d !important;
+}
+
+body.light-theme #inicio .hero-desc-card strong.text-gold {
+  color: #805513 !important;
+}
+
+/* Botones */
+body.light-theme #inicio .btn-gold {
+  background: #a67324 !important;
+  color: #ffffff !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.18);
+}
+
+body.light-theme #inicio .btn-gold:hover {
+  background: #805513 !important;
+  border-color: #805513 !important;
+  color: #ffffff !important;
+}
+
+body.light-theme #inicio .btn-outline {
+  background: rgba(255, 253, 248, 0.86) !important;
+  color: #59412d !important;
+  border: 1px solid rgba(128, 85, 19, 0.48) !important;
+  box-shadow: none !important;
+}
+
+body.light-theme #inicio .btn-outline:hover {
+  background: #f0e3cc !important;
+  color: #2b180d !important;
+  border-color: #a67324 !important;
+}
+
+/* Horario de atención */
+body.light-theme #inicio .hero-hours-pill {
+  background: rgba(255, 253, 248, 0.82) !important;
+  color: #59412d !important;
+  border: 1px solid rgba(166, 115, 36, 0.18) !important;
+}
+
+body.light-theme #inicio .hours-dot {
+  background: #6e8b45 !important;
+  box-shadow: 0 0 0 4px rgba(110, 139, 69, 0.13) !important;
+}
+
+/* Indicadores de calidad, entrega y tueste */
+body.light-theme #inicio .hero-pill {
+  background: rgba(255, 253, 248, 0.90) !important;
+  border: 1px solid rgba(166, 115, 36, 0.22) !important;
+  box-shadow: 0 6px 18px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #inicio .hero-pill small {
+  color: #94651c !important;
+}
+
+body.light-theme #inicio .hero-pill strong {
+  color: #2b180d !important;
+}
+
+body.light-theme #inicio .pill-icon {
+  color: #94651c !important;
+}
+
+/* Tarjeta de lote exclusivo */
+body.light-theme #inicio .lot-card {
+  background: rgba(255, 253, 248, 0.95) !important;
+  color: #2b180d !important;
+  border: 1px solid rgba(166, 115, 36, 0.30) !important;
+  box-shadow: 0 16px 42px rgba(74, 51, 34, 0.12) !important;
+  backdrop-filter: blur(12px);
+}
+
+body.light-theme #inicio .lot-badge {
+  background: #f3e6cb !important;
+  color: #805513 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme #inicio .lot-name {
+  color: #2b180d !important;
+}
+
+body.light-theme #inicio .lot-extract {
+  border-top-color: rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme #inicio .lot-extract span {
+  color: #6b5542 !important;
+}
+
+body.light-theme #inicio .lot-extract strong.text-gold {
+  color: #805513 !important;
+}
+
+/* Franja inferior de datos */
+body.light-theme #inicio .hero-ribbon {
+  background: rgba(236, 228, 212, 0.97) !important;
+  border-top: 1px solid rgba(166, 115, 36, 0.20) !important;
+  border-bottom: 1px solid rgba(166, 115, 36, 0.20) !important;
+}
+
+body.light-theme #inicio .ribbon-item {
+  border-color: rgba(74, 51, 34, 0.13) !important;
+}
+
+body.light-theme #inicio .ribbon-sym {
+  color: #94651c !important;
+}
+
+
+/* KFEST — SOMBRAS CÁLIDAS REFORZADAS EN MODO CLARO */
+
+/* Navbar */
+body.light-theme .navbar {
+  box-shadow:
+    0 6px 18px rgba(74, 51, 34, 0.18),
+    0 2px 5px rgba(166, 115, 36, 0.10) !important;
+}
+
+/* Menú móvil */
+@media (max-width: 880px) {
+  body.light-theme .navbar .nav-links {
+    box-shadow:
+      0 12px 28px rgba(74, 51, 34, 0.20),
+      0 4px 8px rgba(166, 115, 36, 0.10) !important;
+  }
+}
+
+/* Franja inferior del inicio */
+body.light-theme #inicio .hero-ribbon {
+  box-shadow:
+    0 8px 22px rgba(74, 51, 34, 0.18),
+    0 3px 7px rgba(166, 115, 36, 0.10) !important;
+}
+
+/* Mantener limpios los elementos internos */
+body.light-theme #inicio .ribbon-row,
+body.light-theme #inicio .ribbon-item {
+  box-shadow: none !important;
+}
+
+
+/* KFEST — TARJETAS ESTADÍSTICAS DE HISTORIA: MODO CLARO */
+
+body.light-theme #herencia .stat-box {
+  box-shadow:
+    0 6px 16px rgba(74, 51, 34, 0.16),
+    0 2px 5px rgba(166, 115, 36, 0.08) !important;
+
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Al pasar el cursor: más profundidad, sin sombra negra */
+body.light-theme #herencia .stat-box:hover {
+  box-shadow:
+    0 12px 26px rgba(74, 51, 34, 0.23),
+    0 4px 10px rgba(166, 115, 36, 0.12) !important;
+
+  transform: translateY(-4px);
+}
+
+/* Números y textos con contraste adecuado */
+body.light-theme #herencia .stat-num {
+  text-shadow: none !important;
+}
+
+body.light-theme #herencia .stat-box span {
+  text-shadow: none !important;
+}
+
+/* Respetar a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  body.light-theme #herencia .stat-box {
+    transition: none;
+  }
+
+  body.light-theme #herencia .stat-box:hover {
+    transform: none;
+  }
+}
+
+
+/* KFEST — FOTODOCUMENTARIO / CARRUSEL DEL PROCESO EN MODO CLARO */
+
+/* Fondo general de la sección */
+body.light-theme #proceso {
+  background: #f6f1e8 !important;
+  color: #2b180d !important;
+}
+
+/* Encabezado */
+body.light-theme #proceso .process-header {
+  color: #2b180d !important;
+}
+
+body.light-theme #proceso .eyebrow-line {
+  color: #94651c !important;
+}
+
+body.light-theme #proceso .sec-title {
+  color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+body.light-theme #proceso .gold-script {
+  color: #94651c !important;
+  text-shadow: none !important;
+}
+
+body.light-theme #proceso .sec-sub {
+  color: #6b5542 !important;
+}
+
+/* Contenedor del carrusel */
+body.light-theme #proceso .process-carousel-wrap {
+  background: transparent !important;
+}
+
+/* Tarjetas de cada paso */
+body.light-theme #proceso .process-step-card {
+  background: #fffdf8 !important;
+  color: #2b180d !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  border-radius: 12px;
+
+  box-shadow:
+    0 6px 16px rgba(74, 51, 34, 0.16),
+    0 2px 5px rgba(166, 115, 36, 0.08) !important;
+
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Número del paso */
+body.light-theme #proceso .process-step-num {
+  color: #94651c !important;
+  text-shadow: none !important;
+}
+
+/* Texto de cada tarjeta */
+body.light-theme #proceso .process-step-label {
+  background: #fffdf8 !important;
+  color: #4a3322 !important;
+  text-shadow: none !important;
+}
+
+/* Hover: sombra cálida más marcada */
+body.light-theme #proceso .process-step-card:hover {
+  border-color: rgba(166, 115, 36, 0.45) !important;
+
+  box-shadow:
+    0 12px 26px rgba(74, 51, 34, 0.23),
+    0 4px 10px rgba(166, 115, 36, 0.12) !important;
+
+  transform: translateY(-4px);
+}
+
+
+/* KFEST — DEGRADADOS LATERALES DEL CARRUSEL EN MODO CLARO */
+
+/* Izquierda: crema en el borde, transparente hacia el centro */
+body.light-theme #proceso .process-carousel-wrap::before {
+  background: linear-gradient(
+    to right,
+    #f6f1e8 0%,
+    rgba(246, 241, 232, 0.85) 20%,
+    rgba(246, 241, 232, 0) 100%
+  ) !important;
+}
+
+/* Derecha: crema en el borde, transparente hacia el centro */
+body.light-theme #proceso .process-carousel-wrap::after {
+  background: linear-gradient(
+    to left,
+    #f6f1e8 0%,
+    rgba(246, 241, 232, 0.85) 20%,
+    rgba(246, 241, 232, 0) 100%
+  ) !important;
+}
+
+
+/* Accesibilidad: respetar la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  body.light-theme #proceso .process-step-card {
+    transition: none;
+  }
+
+  body.light-theme #proceso .process-step-card:hover {
+    transform: none;
+  }
+}
+/* 1. Número de cada fotografía: etiqueta crema */
+body.light-theme #proceso .process-step-num {
+  background: rgba(255, 253, 248, 0.94) !important;
+  color: #805513 !important;
+  border: 1px solid rgba(166, 115, 36, 0.28) !important;
+
+  box-shadow:
+    0 3px 8px rgba(74, 51, 34, 0.14) !important;
+
+  text-shadow: none !important;
+}
+
+/* 2. Nombre del proceso: degradado café sobre la parte inferior */
+body.light-theme #proceso .process-step-label {
+  background: linear-gradient(
+    to top,
+    rgba(43, 24, 13, 0.88) 0%,
+    rgba(43, 24, 13, 0.62) 48%,
+    rgba(43, 24, 13, 0.18) 82%,
+    transparent 100%
+  ) !important;
+
+  color: #fffdf8 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* KFEST — CARRUSEL: DEGRADADO CLARO Y HOVER CONSISTENTE */
+
+/* 1. Etiqueta inferior con degradado crema */
+body.light-theme #proceso .process-step-label {
+  background: linear-gradient(
+    to top,
+    rgba(246, 241, 232, 0.98) 0%,
+    rgba(246, 241, 232, 0.88) 45%,
+    rgba(246, 241, 232, 0.48) 75%,
+    rgba(246, 241, 232, 0) 100%
+  ) !important;
+
+  color: #4a3322 !important;
+  text-shadow: none !important;
+}
+
+/* 2. La tarjeta no debe levantarse al pasar el cursor */
+body.light-theme #proceso .process-step-card:hover {
+  transform: none !important;
+}
+
+/* La imagen se amplía dentro de la tarjeta */
+body.light-theme #proceso .process-step-card img {
+  transition: transform 0.45s ease !important;
+}
+
+body.light-theme #proceso .process-step-card:hover img {
+  transform: scale(1.07) !important;
+}
+
+/* Evitar que el zoom se salga de los bordes */
+body.light-theme #proceso .process-step-card {
+  overflow: hidden;
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  body.light-theme #proceso .process-step-card img {
+    transition: none !important;
+  }
+
+  body.light-theme #proceso .process-step-card:hover img {
+    transform: none !important;
+  }
+}
+
+/* NUESTRO EQUIPO — ETIQUETAS ADAPTADAS AL MODO CLARO */
+
+body.light-theme .team-badge {
+  background: #fffdf8 !important;
+  color: #94651c !important;
+  border: 1px solid rgba(166, 115, 36, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(74, 51, 34, 0.1) !important;
+}
+
+/* Etiqueta destacada de Doña Teresa */
+body.light-theme .team-badge.badge-gold {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  border-color: #94651c !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.16) !important;
+}
+
+
+/* =========================================================
+   KFEST — COLECCIÓN ADAPTADA AL MODO CLARO
+   ========================================================= */
+
+/* Tarjetas de productos */
+body.light-theme #coleccion .prod-card {
+  background: #fffdf8 !important;
+  color: #2b180d !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 8px 26px rgba(74, 51, 34, 0.09) !important;
+}
+
+body.light-theme #coleccion .prod-card.prod-featured {
+  background: #fffaf0 !important;
+  border: 1.5px solid #a67324 !important;
+  box-shadow: 0 10px 30px rgba(166, 115, 36, 0.14) !important;
+}
+
+body.light-theme #coleccion .prod-card:hover {
+  background: #ffffff !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 12px 30px rgba(166, 115, 36, 0.16) !important;
+}
+
+/* Área de imagen y sombra del producto */
+body.light-theme #coleccion .prod-img-area {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(214, 159, 72, 0.16) 0%,
+    rgba(246, 241, 232, 0.6) 75%
+  ) !important;
+}
+
+body.light-theme #coleccion .prod-img {
+  filter: drop-shadow(0 8px 16px rgba(74, 51, 34, 0.16)) !important;
+}
+
+/* Etiqueta del peso */
+body.light-theme #coleccion .prod-weight {
+  background: #f6f1e8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.3) !important;
+  color: #805513 !important;
+}
+
+/* Etiqueta de producto más solicitado */
+body.light-theme #coleccion .most-req {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.16) !important;
+}
+
+/* Textos y precios */
+body.light-theme #coleccion .prod-name {
+  color: #2b180d !important;
+}
+
+body.light-theme #coleccion .prod-cat {
+  color: #94651c !important;
+}
+
+body.light-theme #coleccion .prod-desc {
+  color: #6b5542 !important;
+}
+
+body.light-theme #coleccion .prod-price small {
+  color: #7a614d !important;
+}
+
+body.light-theme #coleccion .prod-price strong {
+  color: #2b180d !important;
+}
+
+body.light-theme #coleccion .prod-price strong.text-gold {
+  color: #94651c !important;
+}
+
+body.light-theme #coleccion .prod-footer {
+  border-top-color: rgba(74, 51, 34, 0.14) !important;
+}
+
+/* Selector de molienda */
+body.light-theme #coleccion .grind-tabs {
+  background: #f0e6d5 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 4px 12px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #coleccion .grind-tabs button {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #59412d !important;
+}
+
+body.light-theme #coleccion .grind-tabs button:not(.active):hover {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #coleccion .grind-tabs button.active {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 3px 10px rgba(166, 115, 36, 0.2) !important;
+}
+
+/* Franja de coordinación de envíos */
+body.light-theme #coleccion .delivery-strip {
+  background: #f0e6d5 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 6px 20px rgba(74, 51, 34, 0.07) !important;
+}
+
+body.light-theme #coleccion .delivery-text h4 {
+  color: #2b180d !important;
+}
+
+body.light-theme #coleccion .delivery-text p {
+  color: #6b5542 !important;
+}
+
+/* Botón para coordinar la entrega */
+body.light-theme #coleccion .btn-sm-outline {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.35) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #coleccion .btn-sm-outline:hover {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+}
+
+/* BOTÓN WHATSAPP EN PRODUCTOS DESTACADOS */
+body.light-theme #coleccion .prod-card.prod-featured .btn-sm-gold {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.16) !important;
+}
+
+body.light-theme #coleccion .prod-card.prod-featured .btn-sm-gold:hover {
+  background: #805513 !important;
+  border-color: #805513 !important;
+  color: #fffdf8 !important;
+}
+
+/* ORDEN DE CAPAS: ETIQUETA SOBRE LA IMAGEN */
+body.light-theme #coleccion .prod-card {
+  position: relative;
+  isolation: isolate;
+}
+
+body.light-theme #coleccion .prod-card .prod-img-area {
+  position: relative;
+  z-index: 1;
+}
+
+body.light-theme #coleccion .prod-card .most-req {
+  position: absolute;
+  z-index: 5;
+}
+
+/* =========================================================
+   KFEST — TU CAFÉ IDEAL: CORRECCIONES PARA MODO CLARO
+   ========================================================= */
+
+/* Cabecera y pasos */
+body.light-theme #quiz .quiz-badge {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .quiz-stepper {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme #quiz .step-pill {
+  color: #6b5542 !important;
+}
+
+body.light-theme #quiz .step-pill span {
+  background: #e2d7c3 !important;
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .step-pill.step-active {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .step-pill.step-active span {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+}
+
+body.light-theme #quiz .step-pill.step-done span {
+  background: #e9d7b4 !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .step-sep {
+  color: rgba(128, 85, 19, 0.4) !important;
+}
+
+/* Contenedor principal y textos */
+body.light-theme #quiz .quiz-card {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+  box-shadow: 0 10px 32px rgba(74, 51, 34, 0.08) !important;
+}
+
+body.light-theme #quiz .quiz-question,
+body.light-theme #quiz .quiz-cat-card strong,
+body.light-theme #quiz .coffee-card-title,
+body.light-theme #quiz .banner-title,
+body.light-theme #quiz .result-title,
+body.light-theme #quiz .result-notes-box strong,
+body.light-theme #quiz .opt-body strong {
+  color: #2b180d !important;
+}
+
+body.light-theme #quiz .quiz-hint,
+body.light-theme #quiz .cat-card-body p,
+body.light-theme #quiz .coffee-card-desc,
+body.light-theme #quiz .opt-body small,
+body.light-theme #quiz .btn-quiz-back,
+body.light-theme #quiz .btn-quiz-retry {
+  color: #6b5542 !important;
+}
+
+/* Tarjetas de categorías */
+body.light-theme #quiz .quiz-cat-card {
+  background: #fbf8f2 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 4px 14px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #quiz .quiz-cat-card:hover {
+  background: #fffdf8 !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 8px 22px rgba(166, 115, 36, 0.13) !important;
+}
+
+body.light-theme #quiz .cat-icon {
+  background: #f0e6d5 !important;
+  color: #94651c !important;
+}
+
+body.light-theme #quiz .cat-tag {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .cat-card-footer {
+  color: #805513 !important;
+}
+
+/* Filtros de sabores */
+body.light-theme #quiz .quiz-filter-row {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme #quiz .filter-label {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .quiz-filter-chip {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .quiz-filter-chip:hover {
+  border-color: #a67324 !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .quiz-filter-chip.active {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+}
+
+/* Tarjetas de cafés y selección */
+body.light-theme #quiz .quiz-coffee-card {
+  background: #fbf8f2 !important;
+  border-color: rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 4px 14px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #quiz .quiz-coffee-card:hover,
+body.light-theme #quiz .quiz-coffee-card.card-selected {
+  background: #fffdf8 !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 8px 24px rgba(166, 115, 36, 0.14) !important;
+}
+
+body.light-theme #quiz .coffee-card-icon {
+  background: #f0e6d5 !important;
+  color: #94651c !important;
+}
+
+body.light-theme #quiz .coffee-price {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .coffee-badge {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .coffee-card-notes,
+body.light-theme #quiz .result-notes-box {
+  background: #f0e6d5 !important;
+  border-left-color: #a67324 !important;
+}
+
+body.light-theme #quiz .coffee-card-notes small,
+body.light-theme #quiz .result-notes-box small {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .coffee-card-notes span {
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .btn-select-indicator {
+  background: #f0e6d5 !important;
+  border: 1px solid rgba(166, 115, 36, 0.22) !important;
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .btn-select-indicator.active {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+}
+
+/* Banner del café elegido */
+body.light-theme #quiz .quiz-selection-banner {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+}
+
+body.light-theme #quiz .banner-icon,
+body.light-theme #quiz .opt-icon {
+  background: #e9d7b4 !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .banner-cat,
+body.light-theme #quiz .banner-price,
+body.light-theme #quiz .custom-block-title {
+  color: #805513 !important;
+}
+
+/* Opciones de personalización */
+body.light-theme #quiz .quiz-opt {
+  background: #fbf8f2 !important;
+  border-color: rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.04) !important;
+}
+
+body.light-theme #quiz .quiz-opt:hover {
+  background: #fffdf8 !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.12) !important;
+}
+
+body.light-theme #quiz .quiz-opt.opt-active {
+  background: #f0e6d5 !important;
+  border-color: #94651c !important;
+  box-shadow: 0 4px 14px rgba(166, 115, 36, 0.12) !important;
+}
+
+body.light-theme #quiz .opt-price-pill {
+  background: #e9d7b4 !important;
+  color: #805513 !important;
+}
+
+/* Total y navegación */
+body.light-theme #quiz .quiz-total-bar {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme #quiz .total-label {
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .total-amount,
+body.light-theme #quiz .total-gold {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .btn-quiz-back,
+body.light-theme #quiz .btn-quiz-retry {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+}
+
+body.light-theme #quiz .btn-quiz-back:hover,
+body.light-theme #quiz .btn-quiz-retry:hover {
+  background: #f0e6d5 !important;
+  border-color: #a67324 !important;
+  color: #805513 !important;
+}
+
+/* Resultado final */
+body.light-theme #quiz .result-badge {
+  background: #e5f3e7 !important;
+  border-color: #a8d5af !important;
+  color: #286b3b !important;
+}
+
+body.light-theme #quiz .result-img-box {
+  background: radial-gradient(
+    circle,
+    rgba(214, 159, 72, 0.16) 0%,
+    #f0e6d5 75%
+  ) !important;
+  border-color: rgba(166, 115, 36, 0.28) !important;
+}
+
+body.light-theme #quiz .result-img-box img {
+  filter: drop-shadow(0 8px 16px rgba(74, 51, 34, 0.16)) !important;
+}
+
+body.light-theme #quiz .result-cat-pill,
+body.light-theme #quiz .result-price {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .result-reason {
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .result-pill {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+  color: #59412d !important;
+}
+
+body.light-theme #quiz .result-pill.pill-gold {
+  background: #e9d7b4 !important;
+  border-color: rgba(166, 115, 36, 0.35) !important;
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .result-breakdown-card {
+  background: #fbf8f2 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+body.light-theme #quiz .breakdown-title {
+  color: #805513 !important;
+}
+
+body.light-theme #quiz .breakdown-list li {
+  color: #2b180d !important;
+  border-bottom-color: rgba(74, 51, 34, 0.12) !important;
+}
+
+body.light-theme #quiz .breakdown-list li span {
+  color: #6b5542 !important;
+}
+
+/* Botones de acción del resultado */
+body.light-theme #quiz .btn-result-cta,
+body.light-theme #quiz .btn-quiz-next {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.14) !important;
+}
+
+body.light-theme #quiz .btn-result-cta:hover,
+body.light-theme #quiz .btn-quiz-next:hover {
+  background: #805513 !important;
+  border-color: #805513 !important;
+  color: #fffdf8 !important;
+}
+
+/* =========================================================
+   KFEST — BARISTA LAB: ADAPTACIÓN AL MODO CLARO
+   ========================================================= */
+
+/* Fondo general de la sección */
+body.light-theme #calculadora {
+  background: linear-gradient(180deg, #f6f1e8 0%, #ece4d4 100%) !important;
+}
+
+/* Insignia de la cabecera */
+body.light-theme #calculadora .brew-badge {
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.3) !important;
+  color: #805513 !important;
+}
+
+/* Tarjeta principal */
+body.light-theme #calculadora .brew-card {
+  background: #fffdf8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.26) !important;
+  box-shadow: 0 10px 32px rgba(74, 51, 34, 0.09) !important;
+  backdrop-filter: none !important;
+}
+
+/* Selector de métodos de preparación */
+body.light-theme #calculadora .brew-method-btn {
+  background: #f6f1e8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  color: #59412d !important;
+  box-shadow: 0 3px 10px rgba(74, 51, 34, 0.04) !important;
+}
+
+body.light-theme #calculadora .brew-method-btn .bm-icon {
+  color: #94651c !important;
+}
+
+body.light-theme #calculadora .brew-method-btn .bm-name {
+  color: #59412d !important;
+}
+
+body.light-theme #calculadora .brew-method-btn:hover {
+  background: #fffdf8 !important;
+  border-color: #a67324 !important;
+  color: #805513 !important;
+  box-shadow: 0 6px 16px rgba(166, 115, 36, 0.12) !important;
+}
+
+body.light-theme #calculadora .brew-method-btn.active {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 5px 14px rgba(166, 115, 36, 0.2) !important;
+}
+
+body.light-theme #calculadora .brew-method-btn.active .bm-icon,
+body.light-theme #calculadora .brew-method-btn.active .bm-name {
+  color: #fffdf8 !important;
+}
+
+/* Selector de cantidad de tazas */
+body.light-theme #calculadora .brew-cups-control {
+  background: #f0e6d5 !important;
+  border: 1px solid rgba(166, 115, 36, 0.22) !important;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+body.light-theme #calculadora .cups-lbl {
+  color: #59412d !important;
+}
+
+body.light-theme #calculadora .cups-stepper {
+  background: #fffdf8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  border-radius: 999px;
+}
+
+body.light-theme #calculadora .cup-btn {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  border-color: #94651c !important;
+}
+
+body.light-theme #calculadora .cup-btn:hover:not(:disabled) {
+  background: #805513 !important;
+  color: #fffdf8 !important;
+}
+
+body.light-theme #calculadora .cup-btn:disabled {
+  background: #e2d7c3 !important;
+  border-color: #e2d7c3 !important;
+  color: #8a7763 !important;
+  opacity: 1 !important;
+}
+
+body.light-theme #calculadora .cup-display {
+  color: #2b180d !important;
+}
+
+/* Tarjetas de resultados */
+body.light-theme #calculadora .brew-metric-card {
+  background: #fffdf8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.24) !important;
+  box-shadow: 0 5px 16px rgba(74, 51, 34, 0.06) !important;
+}
+
+body.light-theme #calculadora .brew-metric-card .metric-top i {
+  color: #94651c !important;
+}
+
+body.light-theme #calculadora .brew-metric-card .metric-top small {
+  color: #805513 !important;
+}
+
+body.light-theme #calculadora .brew-metric-card .metric-val {
+  color: #2b180d !important;
+}
+
+body.light-theme #calculadora .brew-metric-card .metric-unit {
+  color: #805513 !important;
+}
+
+body.light-theme #calculadora .brew-metric-card .metric-sub {
+  color: #6b5542 !important;
+}
+
+/* Tarjeta destacada: dosis de café */
+body.light-theme #calculadora .brew-metric-card.highlight-gold {
+  background: #f0e6d5 !important;
+  border-color: #a67324 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.12) !important;
+}
+
+body.light-theme #calculadora .brew-metric-card.highlight-gold .metric-top i,
+body.light-theme #calculadora .brew-metric-card.highlight-gold .metric-top small,
+body.light-theme #calculadora .brew-metric-card.highlight-gold .metric-val,
+body.light-theme #calculadora .brew-metric-card.highlight-gold .metric-unit,
+body.light-theme #calculadora .brew-metric-card.highlight-gold .metric-sub {
+  color: #805513 !important;
+}
+
+/* Consejo del barista */
+body.light-theme #calculadora .brew-tip-box {
+  background: #f0e6d5 !important;
+  border: 1px solid rgba(166, 115, 36, 0.25) !important;
+  box-shadow: 0 5px 16px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #calculadora .tip-icon {
+  background: #e9d7b4 !important;
+  color: #805513 !important;
+}
+
+body.light-theme #calculadora .tip-text strong {
+  color: #805513 !important;
+}
+
+body.light-theme #calculadora .tip-text p {
+  color: #59412d !important;
+}
+
+/* Franja de accesorios recomendados */
+body.light-theme #calculadora .brew-gear-strip {
+  background: #fbf8f2 !important;
+  border: 1px solid rgba(166, 115, 36, 0.22) !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(74, 51, 34, 0.05) !important;
+}
+
+body.light-theme #calculadora .gear-strip-label {
+  color: #805513 !important;
+}
+
+body.light-theme #calculadora .gear-item {
+  background: transparent !important;
+  border-color: rgba(166, 115, 36, 0.18) !important;
+}
+
+body.light-theme #calculadora .gear-item small {
+  color: #59412d !important;
+}
+
+body.light-theme #calculadora .gear-img-box {
+  background: #f0e6d5 !important;
+  border-color: rgba(166, 115, 36, 0.2) !important;
+}
+
+body.light-theme #calculadora .gear-item.gear-active {
+  border-color: rgba(166, 115, 36, 0.3) !important;
+}
+
+/* Botón de pedido por WhatsApp */
+body.light-theme #calculadora .btn-brew-cta {
+  background: #94651c !important;
+  border-color: #94651c !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 4px 12px rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme #calculadora .btn-brew-cta:hover {
+  background: #805513 !important;
+  border-color: #805513 !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.2) !important;
+}
+
+/* KFEST — ÚTILKFEST: BOTÓN WHATSAPP EN MODO CLARO */
+body.light-theme #utilkfest .btn-outline {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  border: 1px solid #94651c !important;
+  box-shadow: 0 4px 12px rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme #utilkfest .btn-outline i {
+  color: #fffdf8 !important;
+}
+
+body.light-theme #utilkfest .btn-outline:hover {
+  background: #805513 !important;
+  color: #fffdf8 !important;
+  border-color: #805513 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.2) !important;
+}
+
+body.light-theme #utilkfest .btn-outline:hover i {
+  color: #fffdf8 !important;
+}
+
+/* KFEST — CONTACTO: ADAPTACIÓN AL MODO CLARO */
+
+/* Botón de WhatsApp Business */
+body.light-theme #contacto .concierge-cta .btn-gold {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  border: 1px solid #94651c !important;
+  box-shadow: 0 4px 12px rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme #contacto .concierge-cta .btn-gold i {
+  color: #fffdf8 !important;
+}
+
+body.light-theme #contacto .concierge-cta .btn-gold:hover {
+  background: #805513 !important;
+  color: #fffdf8 !important;
+  border-color: #805513 !important;
+  box-shadow: 0 6px 18px rgba(166, 115, 36, 0.2) !important;
+}
+
+body.light-theme #contacto .concierge-cta .btn-gold:hover i {
+  color: #fffdf8 !important;
+}
+
+/* Etiqueta de tiempo de respuesta */
+body.light-theme #contacto .resp-tag {
+  color: #6b5542 !important;
+}
+
+/* Tarjeta de información oficial */
+body.light-theme #contacto .official-card {
+  background: #fffdf8 !important;
+  border: 1px solid rgba(166, 115, 36, 0.26) !important;
+  box-shadow: 0 10px 30px rgba(74, 51, 34, 0.08) !important;
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .official-card .card-lbl {
+  color: #805513 !important;
+}
+
+body.light-theme #contacto .official-card .phone-main,
+body.light-theme #contacto .official-card .phone-sec,
+body.light-theme #contacto .official-card .email {
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .official-card .card-hr {
+  border-color: rgba(166, 115, 36, 0.22) !important;
+}
+
+body.light-theme #contacto .official-card .verse {
+  color: #59412d !important;
+  border-left-color: #a67324 !important;
+}
+
+body.light-theme #contacto .official-card .verse-ref {
+  color: #805513 !important;
+}
+
+/* KFEST — CONTACTO: FONDO COMPLETO EN MODO CLARO */
+body.light-theme section#contacto.section-brown {
+  background: linear-gradient(180deg, #f6f1e8 0%, #ece4d4 100%) !important;
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .concierge-left,
+body.light-theme #contacto .concierge-wrap {
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .eyebrow {
+  color: #805513 !important;
+}
+
+body.light-theme #contacto .concierge-desc {
+  color: #59412d !important;
+}
+
+body.light-theme #contacto .hashtags span {
+  color: #805513 !important;
+  background: #fffdf8 !important;
+  border-color: rgba(166, 115, 36, 0.25) !important;
+}
+
+/* Tarjeta: evitar que conserve el fondo oscuro */
+body.light-theme #contacto .official-card {
+  background: #fffdf8 !important;
+  color: #2b180d !important;
+  border: 1px solid rgba(166, 115, 36, 0.26) !important;
+  box-shadow: 0 10px 30px rgba(74, 51, 34, 0.08) !important;
+}
+
+body.light-theme #contacto .official-card .phone-main,
+body.light-theme #contacto .official-card .phone-sec,
+body.light-theme #contacto .official-card .email {
+  color: #2b180d !important;
+}
+
+body.light-theme #contacto .official-card .card-lbl,
+body.light-theme #contacto .official-card .verse-ref {
+  color: #805513 !important;
+}
+
+body.light-theme #contacto .official-card .verse {
+  color: #59412d !important;
+}
+
+body.light-theme #contacto .official-card .card-hr {
+  border-color: rgba(166, 115, 36, 0.22) !important;
+}
+
+/* KFESTCAR — BOTÓN WHATSAPP EN MODO CLARO */
+body.light-theme .catering-action a.btn-gold {
+  background: #94651c !important;
+  color: #fffdf8 !important;
+  border: 1px solid #94651c !important;
+  box-shadow: 0 4px 12px rgba(74, 51, 34, 0.15) !important;
+}
+
+body.light-theme .catering-action a.btn-gold i {
+  color: #fffdf8 !important;
+}
+
+body.light-theme .catering-action a.btn-gold:hover {
+  background: #805513 !important;
+  color: #fffdf8 !important;
+  border-color: #805513 !important;
+}
+
+body.light-theme .catering-action a.btn-gold:hover i {
+  color: #fffdf8 !important;
+}
