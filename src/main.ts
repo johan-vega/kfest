@@ -1,16 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { IMAGE_CONFIG } from '@angular/common';
 import { App } from './app/app';
+import { appConfig } from './app/app.config';
 
-bootstrapApplication(App, {
-  providers: [
-    {
-      provide: IMAGE_CONFIG,
-      useValue: {
-        disableImageSizeWarning: true,
-        disableImageLazyLoadWarning: true
-      }
-    }
-  ]
-})
-  .catch((err) => console.error(err));
+bootstrapApplication(App, appConfig).catch(err => console.error(err));
