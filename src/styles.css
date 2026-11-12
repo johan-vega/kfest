@@ -1,8 +1,8 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /* =====================================================
-   KFEST — LUXURY GLOBAL DESIGN SYSTEM
-   Fuentes: Playfair Display · Cormorant Garamond · Inter
+  KFEST — LUXURY GLOBAL DESIGN SYSTEM
+  Fuentes: Playfair Display · Cormorant Garamond · Inter
    ===================================================== */
 
 :root {
@@ -185,17 +185,24 @@ img {
    ===================================================== */
 body.light-theme,
 .light-theme {
-  --bg0: #f6f1e8; /* Crema artesanal suave */
+  --bg0: #f6f1e8;
+  /* Crema artesanal suave */
   --bg0-rgb: 246, 241, 232;
-  --bg1: #ece4d4; /* Crema tostado pergamino */
-  --bg2: #ffffff; /* Blanco puro para tarjetas */
-  --bg3: #fbf8f2; /* Crema seda */
+  --bg1: #ece4d4;
+  /* Crema tostado pergamino */
+  --bg2: #ffffff;
+  /* Blanco puro para tarjetas */
+  --bg3: #fbf8f2;
+  /* Crema seda */
   --bg4: #e2d7c3;
 
   /* Tipografía en café tostado oscuro */
-  --text0: #2b180d; /* Café tostado profundo */
-  --text1: #4a3322; /* Tono café con cuerpo */
-  --text2: #7a614d; /* Canela y avellana tostada */
+  --text0: #2b180d;
+  /* Café tostado profundo */
+  --text1: #4a3322;
+  /* Tono café con cuerpo */
+  --text2: #7a614d;
+  /* Canela y avellana tostada */
   --text3: #9e8773;
 
   /* Oro cálido tostado */
@@ -279,4 +286,4 @@ body.light-theme .nav-link.active,
 body.light-theme .brand-logo-img,
 .light-theme .brand-logo-img {
   filter: drop-shadow(0 1px 3px rgba(74, 51, 34, 0.15)) !important;
-}
+}

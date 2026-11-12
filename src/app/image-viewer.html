@@ -1,0 +1,53 @@
+<dialog #dialog class="image-viewer" aria-labelledby="image-viewer-title"
+  aria-describedby="image-viewer-help" (cancel)="onCancel($event)"
+  (click)="onBackdropClick($event)" (keydown)="onKeyDown($event)">
+  <header class="viewer-header">
+    <div>
+      <span class="viewer-overline">KFEST · {{ navigation ? (language === 'es' ? 'CARTA OFICIAL' : 'OFFICIAL MENU') : 'ÚTILKFEST' }}</span>
+      <h2 id="image-viewer-title">{{ title }}</h2>
+      @if (subtitle) { <p>{{ subtitle }}</p> }
+    </div>
+    <button type="button" class="viewer-close" autofocus (click)="closed.emit()"
+      [attr.aria-label]="language === 'es' ? 'Cerrar vista ampliada' : 'Close enlarged view'">✕</button>
+  </header>
+
+  <div class="viewer-toolbar" role="group" [attr.aria-label]="language === 'es' ? 'Controles de zoom' : 'Zoom controls'">
+    <button type="button" (click)="setZoom(zoom - 0.25)" [disabled]="zoom <= 1 || imageFailed"
+      [attr.aria-label]="language === 'es' ? 'Reducir zoom' : 'Zoom out'">−</button>
+    <output aria-live="polite">{{ zoomPercent }} %</output>
+    <button type="button" (click)="setZoom(zoom + 0.25)" [disabled]="zoom >= 4 || imageFailed"
+      [attr.aria-label]="language === 'es' ? 'Aumentar zoom' : 'Zoom in'">+</button>
+    <button type="button" class="viewer-fit" (click)="resetZoom()">{{ language === 'es' ? 'Ajustar a pantalla' : 'Fit to screen' }}</button>
+    <p id="image-viewer-help">{{ language === 'es' ? 'Amplía y arrastra o desliza para explorar la imagen.' : 'Zoom in, then drag or scroll to explore the image.' }}</p>
+  </div>
+
+  <div #viewport class="viewer-viewport" tabindex="0" role="region"
+    [attr.aria-label]="language === 'es' ? 'Imagen ampliable con desplazamiento' : 'Zoomable image with scrolling'"
+    [class.zoomed]="zoom > 1" [class.dragging]="dragging"
+    (pointerdown)="onPointerDown($event)" (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerEnd()" (pointercancel)="onPointerEnd()" (lostpointercapture)="onPointerEnd()">
+    <div class="viewer-stage">
+      @if (src) {
+        <img #image [src]="src" [alt]="title" draggable="false"
+          [style.width.px]="fitWidth > 0 ? fitWidth * zoom : null"
+          [class.measured]="fitWidth > 0" [hidden]="imageFailed"
+          (load)="onImageLoad()" (error)="imageFailed = true" />
+      }
+      @if (imageFailed) { <p role="alert">{{ language === 'es' ? 'No se pudo cargar la imagen. Cierra y vuelve a intentarlo.' : 'The image could not load. Close and try again.' }}</p> }
+    </div>
+  </div>
+
+  <footer class="viewer-footer">
+    @if (navigation) {
+      <div class="viewer-pages">
+        <button type="button" (click)="previous.emit()" [attr.aria-label]="language === 'es' ? 'Página anterior' : 'Previous page'">‹</button>
+        <span>{{ counter }}</span>
+        <button type="button" (click)="next.emit()" [attr.aria-label]="language === 'es' ? 'Página siguiente' : 'Next page'">›</button>
+      </div>
+    }
+    <a [href]="whatsAppLink" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      {{ language === 'es' ? 'Consultar por WhatsApp' : 'Ask via WhatsApp' }}
+    </a>
+  </footer>
+</dialog>

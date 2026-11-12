@@ -1395,10 +1395,12 @@
    ============================================================ */
 .util-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr;
+  gap: 36px;
   align-items: center;
 }
+.util-left { max-width: 820px; margin: 0 auto; text-align: center; }
+.util-right { min-width: 0; }
 .eco-label {
   display: inline-flex;
   align-items: center;
@@ -1432,10 +1434,15 @@
 
 .util-items {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 .util-card {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  color: inherit;
+  cursor: zoom-in;
   background: var(--bg2);
   border: 1px solid var(--bdr-light);
   border-radius: var(--r-lg);
@@ -1450,7 +1457,8 @@
   box-shadow: var(--gold-glow);
 }
 .util-img {
-  height: 200px;
+  position: relative;
+  height: 260px;
   border-radius: var(--r-md);
   background: radial-gradient(circle at 50% 50%, rgba(230, 202, 133, 0.12) 0%, var(--bg1) 80%);
   display: flex;
@@ -1481,6 +1489,13 @@
   letter-spacing: 1.4px;
   color: var(--gold);
   font-weight: 700;
+}
+.util-expand-icon { position: absolute; right: 10px; bottom: 10px; display: grid; place-items: center; width: 34px; height: 34px; background: var(--bg1); color: var(--gold); border: 1px solid var(--gold-bdr); border-radius: 50%; }
+.util-view-label { display: block; margin-top: 16px; color: var(--gold); font-size: .8rem; }
+.util-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 760px) {
+  .util-items { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 20px; }
+  .util-img { height: 280px; }
 }
 
 /* ============================================================
@@ -2652,725 +2667,6 @@
 }
 
 /* ============================================================
-   12. DESCUBRE TU CAFÉ IDEAL - QUIZ (FEATURE B)
-   ============================================================ */
-.quiz-section {
-  position: relative;
-}
-.quiz-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.quiz-header .sec-sub {
-  margin: 0 auto 28px;
-}
-.quiz-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: var(--r-full);
-  background: rgba(230, 202, 133, 0.08);
-  border: 1px solid var(--gold-bdr);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 14px;
-}
-.quiz-stepper {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(18, 14, 10, 0.75);
-  border: 1px solid var(--gold-bdr);
-  padding: 8px 24px;
-  border-radius: var(--r-full);
-}
-.step-pill {
-  font-size: 0.78rem;
-  color: var(--text3);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: var(--ease);
-}
-.step-pill span {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-.step-pill.step-active {
-  color: var(--gold);
-  font-weight: 700;
-}
-.step-pill.step-active span {
-  background: var(--gold);
-  color: #0b0a08;
-}
-.step-pill.step-done {
-  color: var(--text1);
-}
-.step-pill.step-done span {
-  background: rgba(230, 202, 133, 0.25);
-  color: var(--gold);
-}
-.step-sep {
-  color: rgba(230, 202, 133, 0.2);
-  font-size: 0.7rem;
-}
-.quiz-card {
-  max-width: 900px;
-  margin: 0 auto;
-  background: linear-gradient(145deg, rgba(22, 17, 13, 0.9), rgba(12, 9, 7, 0.95));
-  border: 1px solid var(--gold-bdr-hi);
-  border-radius: var(--r-xl);
-  padding: 44px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), var(--gold-glow);
-  backdrop-filter: blur(20px);
-}
-.quiz-question {
-  font-family: var(--ff-serif);
-  font-size: 1.6rem;
-  color: var(--text0);
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.quiz-hint {
-  font-size: 0.88rem;
-  color: var(--text2);
-  margin-bottom: 28px;
-}
-.quiz-options-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.quiz-opt {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: rgba(26, 20, 15, 0.8);
-  border: 1px solid rgba(230, 202, 133, 0.2);
-  border-radius: var(--r-md);
-  padding: 20px 22px;
-  text-align: left;
-  transition: var(--ease);
-}
-.quiz-opt:hover {
-  border-color: var(--gold);
-  background: rgba(35, 27, 20, 0.9);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), var(--gold-glow);
-}
-.opt-icon {
-  font-size: 1.6rem;
-  color: var(--gold);
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r-sm);
-  background: rgba(230, 202, 133, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.opt-body strong {
-  display: block;
-  font-size: 0.95rem;
-  color: var(--text0);
-  margin-bottom: 4px;
-}
-.opt-body small {
-  display: block;
-  font-size: 0.76rem;
-  color: var(--text2);
-  line-height: 1.35;
-}
-.quiz-nav-row {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 10px;
-}
-.btn-quiz-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text2);
-  padding: 8px 16px;
-  border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: var(--ease);
-}
-.btn-quiz-back:hover {
-  color: var(--gold);
-  border-color: var(--gold-bdr);
-}
-
-/* Step 1: Categories Grid */
-.quiz-categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.quiz-cat-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: rgba(26, 20, 15, 0.85);
-  border: 1px solid rgba(230, 202, 133, 0.2);
-  border-radius: var(--r-md);
-  padding: 22px;
-  text-align: left;
-  cursor: pointer;
-  transition: var(--ease);
-  position: relative;
-  overflow: hidden;
-}
-.quiz-cat-card:hover {
-  border-color: var(--gold);
-  background: rgba(35, 27, 20, 0.95);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), var(--gold-glow);
-}
-.cat-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-.cat-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r-sm);
-  background: rgba(230, 202, 133, 0.12);
-  color: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-}
-.cat-tag {
-  font-size: 0.7rem;
-  letter-spacing: 0.5px;
-  padding: 4px 10px;
-  border-radius: var(--r-full);
-  background: rgba(230, 202, 133, 0.1);
-  border: 1px solid rgba(230, 202, 133, 0.25);
-  color: var(--gold);
-  font-weight: 600;
-}
-.cat-card-body strong {
-  display: block;
-  font-size: 1.15rem;
-  color: var(--text0);
-  margin-bottom: 6px;
-  font-family: var(--ff-serif);
-}
-.cat-card-body p {
-  font-size: 0.82rem;
-  color: var(--text2);
-  line-height: 1.45;
-  margin-bottom: 16px;
-}
-.cat-card-footer {
-  font-size: 0.78rem;
-  color: var(--gold);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Step 2: Flavor Filters & Coffee Cards Grid */
-.quiz-filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-  padding: 12px 18px;
-  border-radius: var(--r-md);
-  background: rgba(18, 14, 10, 0.6);
-  border: 1px solid rgba(230, 202, 133, 0.15);
-}
-.filter-label {
-  font-size: 0.78rem;
-  color: var(--gold);
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.quiz-filter-chip {
-  padding: 6px 14px;
-  border-radius: var(--r-full);
-  font-size: 0.78rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--text2);
-  cursor: pointer;
-  transition: var(--ease);
-}
-.quiz-filter-chip:hover {
-  color: var(--gold);
-  border-color: var(--gold-bdr);
-}
-.quiz-filter-chip.active {
-  background: var(--gold);
-  color: #0b0a08;
-  border-color: var(--gold);
-  font-weight: 700;
-}
-
-.quiz-coffees-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  margin-bottom: 28px;
-  max-height: 480px;
-  overflow-y: auto;
-  padding: 4px;
-}
-.quiz-coffee-card {
-  background: rgba(26, 20, 15, 0.85);
-  border: 1px solid rgba(230, 202, 133, 0.2);
-  border-radius: var(--r-md);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: var(--ease);
-  position: relative;
-}
-.quiz-coffee-card:hover {
-  border-color: rgba(230, 202, 133, 0.6);
-  background: rgba(35, 27, 20, 0.95);
-  transform: translateY(-2px);
-}
-.quiz-coffee-card.card-selected {
-  border-color: var(--gold);
-  background: linear-gradient(145deg, rgba(35, 27, 20, 0.95), rgba(45, 33, 22, 0.95));
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), var(--gold-glow);
-}
-.coffee-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-.coffee-card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--r-sm);
-  background: rgba(230, 202, 133, 0.1);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-.coffee-card-pricing {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-}
-.coffee-price {
-  font-family: var(--ff-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-.coffee-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: var(--r-full);
-  background: rgba(230, 202, 133, 0.12);
-  border: 1px solid var(--gold-bdr);
-  color: var(--gold);
-  white-space: nowrap;
-}
-.coffee-card-title {
-  font-family: var(--ff-serif);
-  font-size: 1.15rem;
-  color: var(--text0);
-  margin-bottom: 6px;
-}
-.coffee-card-desc {
-  font-size: 0.78rem;
-  color: var(--text2);
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.coffee-card-notes {
-  background: rgba(18, 14, 10, 0.6);
-  border-left: 2px solid var(--gold);
-  padding: 6px 10px;
-  border-radius: 0 var(--r-xs) var(--r-xs) 0;
-  margin-bottom: 14px;
-}
-.coffee-card-notes small {
-  display: block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 1px;
-}
-.coffee-card-notes span {
-  font-size: 0.74rem;
-  color: var(--text1);
-  line-height: 1.3;
-}
-.btn-select-indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 7px 12px;
-  border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text2);
-  transition: var(--ease);
-}
-.btn-select-indicator.active {
-  background: rgba(230, 202, 133, 0.18);
-  border: 1px solid var(--gold-bdr);
-  color: var(--gold);
-  font-weight: 700;
-}
-
-/* Step 3: Selection Banner & Customizations */
-.quiz-selection-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-radius: var(--r-md);
-  background: linear-gradient(135deg, rgba(35, 27, 20, 0.9), rgba(20, 15, 11, 0.95));
-  border: 1px solid var(--gold-bdr);
-  margin-bottom: 24px;
-}
-.banner-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.banner-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--r-sm);
-  background: rgba(230, 202, 133, 0.15);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-}
-.banner-cat {
-  font-size: 0.7rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-}
-.banner-title {
-  font-family: var(--ff-serif);
-  font-size: 1.25rem;
-  color: var(--text0);
-}
-.banner-price {
-  font-family: var(--ff-serif);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-.custom-block {
-  margin-bottom: 24px;
-}
-.custom-block-title {
-  font-size: 0.92rem;
-  color: var(--gold);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-}
-.quiz-opt.opt-active {
-  border-color: var(--gold);
-  background: rgba(45, 33, 22, 0.95);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(230, 202, 133, 0.2);
-}
-.opt-price-pill {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: var(--r-full);
-  background: rgba(230, 202, 133, 0.15);
-  color: var(--gold);
-  margin-left: auto;
-  flex-shrink: 0;
-}
-.quiz-total-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 14px 20px;
-  border-radius: var(--r-md);
-  background: rgba(18, 14, 10, 0.8);
-  border: 1px solid rgba(230, 202, 133, 0.2);
-  margin-bottom: 24px;
-}
-.total-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: var(--text1);
-}
-.total-amount {
-  font-family: var(--ff-serif);
-  font-size: 1.6rem;
-  color: var(--gold);
-  font-weight: 700;
-}
-
-/* Step 4: Result Breakdown & Visuals */
-.result-cat-pill {
-  display: inline-block;
-  font-size: 0.72rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.result-price-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.result-icon-fallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  color: var(--gold);
-  font-size: 4rem;
-}
-.result-icon-fallback span {
-  font-size: 0.72rem;
-  letter-spacing: 2px;
-  font-weight: 700;
-}
-.result-breakdown-card {
-  background: rgba(18, 14, 10, 0.75);
-  border: 1px solid rgba(230, 202, 133, 0.2);
-  border-radius: var(--r-md);
-  padding: 16px 20px;
-  margin-bottom: 24px;
-}
-.breakdown-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: var(--gold);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.breakdown-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.breakdown-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.84rem;
-  color: var(--text1);
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-.breakdown-list li span {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text2);
-}
-.breakdown-total-item {
-  border-bottom: none !important;
-  padding-top: 6px;
-  font-size: 0.95rem !important;
-}
-.total-gold {
-  font-size: 1.25rem;
-  color: var(--gold);
-  font-weight: 700;
-}
-.quiz-nav-between {
-  justify-content: space-between !important;
-}
-.btn-quiz-next {
-  padding: 10px 22px;
-  font-size: 0.84rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Quiz Result Layout */
-.result-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: var(--r-full);
-  background: rgba(74, 222, 128, 0.12);
-  border: 1px solid rgba(74, 222, 128, 0.35);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #4ade80;
-  margin-bottom: 24px;
-}
-.result-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 36px;
-  align-items: center;
-}
-.result-img-box {
-  background: radial-gradient(circle, rgba(230, 202, 133, 0.15) 0%, rgba(9, 7, 5, 0.8) 70%);
-  border: 1px solid var(--gold-bdr);
-  border-radius: var(--r-lg);
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.result-img-box img {
-  max-height: 240px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.8));
-}
-.result-title {
-  font-family: var(--ff-serif);
-  font-size: 1.85rem;
-  color: var(--text0);
-  margin-bottom: 6px;
-}
-.result-price {
-  font-family: var(--ff-serif);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-.result-pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.result-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.76rem;
-  color: var(--text1);
-}
-.result-pill.pill-gold {
-  background: rgba(230, 202, 133, 0.12);
-  border-color: var(--gold-bdr);
-  color: var(--gold);
-  font-weight: 600;
-}
-.result-reason {
-  font-size: 0.92rem;
-  color: var(--text1);
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
-.result-notes-box {
-  background: rgba(18, 14, 10, 0.7);
-  border-left: 2px solid var(--gold);
-  padding: 10px 16px;
-  margin-bottom: 24px;
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-}
-.result-notes-box small {
-  display: block;
-  font-size: 0.62rem;
-  letter-spacing: 1.5px;
-  color: var(--gold);
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.result-notes-box strong {
-  font-size: 0.88rem;
-  color: var(--text0);
-}
-.result-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-}
-.btn-result-cta {
-  padding: 14px 28px;
-  font-size: 0.84rem;
-}
-.btn-quiz-retry {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text2);
-  padding: 10px 18px;
-  border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: var(--ease);
-}
-.btn-quiz-retry:hover {
-  color: var(--gold);
-  border-color: var(--gold-bdr);
-}
-
-/* ============================================================
    13. CALCULADORA BARISTA DE EXTRACCIÓN (FEATURE A)
    ============================================================ */
 .brew-section {
@@ -3502,6 +2798,44 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 28px;
+}
+.brew-options { margin-bottom: 28px; display: grid; gap: 16px; }
+.brew-volume-options { border: 0; padding: 0; min-width: 0; }
+.brew-volume-options legend, .brew-field { color: var(--text0); font-size: 0.92rem; font-weight: 600; }
+.brew-volume-options button {
+  margin: 10px 8px 8px 0;
+  padding: 10px 16px;
+  border: 1px solid var(--gold-bdr);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--text0);
+}
+.brew-volume-options button.active { background: var(--gold-grad); color: #17110d; }
+.brew-volume-options p, .brew-field small { color: var(--text2); font-size: 0.8rem; font-weight: 400; }
+.brew-field { display: grid; gap: 8px; }
+.brew-field select, .brew-field input {
+  width: 100%; min-width: 0; padding: 12px; border: 1px solid var(--gold-bdr);
+  border-radius: var(--r-md); color: var(--text0); background: var(--bg1, #18120e);
+  font: inherit; color-scheme: dark;
+}
+.brew-field select:disabled { opacity: 0.85; cursor: not-allowed; }
+.brew-section button:focus-visible, .brew-section input:focus-visible,
+.brew-section select:focus-visible, .brew-section a:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 4px;
+}
+.brew-section .brew-value-text { font-size: 1.12rem; line-height: 1.4; overflow-wrap: anywhere; }
+.brew-batch-summary { padding: 18px; margin-bottom: 28px; border: 1px solid var(--gold-bdr); border-radius: var(--r-md); color: var(--text1); }
+.brew-batch-summary strong, .brew-reference { color: var(--gold); }
+.brew-batch-summary p { margin: 8px 0 0; font-size: 0.86rem; line-height: 1.6; }
+.brew-batch-summary .brew-warning { color: var(--text0); }
+.brew-tip-box ol { padding-left: 20px; margin: 10px 0 18px; color: var(--text1); font-size: 0.86rem; line-height: 1.65; }
+.brew-tip-box li + li { margin-top: 8px; }
+.brew-section .metric-val { overflow-wrap: anywhere; }
+.brew-section .brew-metric-card { min-width: 0; gap: 5px; }
+body.light-theme .brew-field select, body.light-theme .brew-field input { color-scheme: light; background: #fff8ec; }
+@media (max-width: 560px) {
+  .brew-section .brew-tip-box { padding: 16px 12px; gap: 10px; }
+  .brew-section .brew-badge { letter-spacing: 1px; font-size: 0.58rem; }
 }
 .brew-metric-card {
   background: rgba(18, 14, 10, 0.7);
@@ -4076,18 +3410,14 @@
   .trace-content-grid { grid-template-columns: repeat(2, 1fr); }
   .brew-methods-grid { grid-template-columns: repeat(3, 1fr); }
   .brew-results-grid { grid-template-columns: repeat(2, 1fr); }
-  .result-layout { grid-template-columns: 1fr; text-align: center; }
-  .result-img-box { max-width: 220px; margin: 0 auto; }
-  .result-pill-row, .result-actions { justify-content: center; }
   .test-slider-card { padding: 32px 24px; }
   .test-author-row { flex-direction: column; align-items: flex-start; }
   .author-favorite { text-align: left; }
 }
 
 @media (max-width: 600px) {
-  .trace-card, .quiz-card, .brew-card { padding: 24px 18px; }
+  .trace-card, .brew-card { padding: 24px 18px; }
   .trace-content-grid { grid-template-columns: 1fr; }
-  .quiz-options-grid { grid-template-columns: 1fr; }
   .brew-methods-grid { grid-template-columns: repeat(2, 1fr); }
   .brew-results-grid { grid-template-columns: 1fr; }
   .brew-cups-control { flex-direction: column; text-align: center; }
@@ -4915,74 +4245,6 @@ body.light-theme .profile-price-row strong {
   color: var(--text0) !important;
 }
 
-/* Quiz, Barista Calculator, Traceability */
-body.light-theme .quiz-card {
-  background: #ffffff !important;
-  border: 1px solid rgba(166, 115, 36, 0.25) !important;
-  box-shadow: 0 10px 32px rgba(74, 51, 34, 0.08) !important;
-}
-body.light-theme .quiz-opt {
-  background: #fbf8f2;
-  border-color: rgba(166, 115, 36, 0.22);
-  color: var(--text0);
-}
-body.light-theme .quiz-opt:hover,
-body.light-theme .quiz-opt.active {
-  background: #ffffff;
-  border-color: var(--gold);
-  box-shadow: 0 4px 16px rgba(166, 115, 36, 0.2);
-}
-body.light-theme .quiz-opt strong {
-  color: var(--text0);
-}
-body.light-theme .quiz-opt span {
-  color: var(--text2);
-}
-body.light-theme .quiz-question {
-  color: var(--text0);
-}
-body.light-theme .quiz-hint {
-  color: var(--text2);
-}
-body.light-theme .quiz-cat-card,
-body.light-theme .quiz-coffee-card {
-  background: #fbf8f2 !important;
-  border-color: rgba(166, 115, 36, 0.22) !important;
-}
-body.light-theme .quiz-cat-card:hover,
-body.light-theme .quiz-coffee-card:hover,
-body.light-theme .quiz-coffee-card.card-selected {
-  background: #ffffff !important;
-  border-color: var(--gold) !important;
-  box-shadow: 0 8px 24px rgba(166, 115, 36, 0.2) !important;
-}
-body.light-theme .quiz-cat-card strong,
-body.light-theme .quiz-coffee-card .coffee-card-title,
-body.light-theme .banner-title {
-  color: var(--text0) !important;
-}
-body.light-theme .quiz-filter-row {
-  background: #fbf8f2 !important;
-  border-color: rgba(166, 115, 36, 0.2) !important;
-}
-body.light-theme .quiz-filter-chip {
-  background: #f3ecde !important;
-  color: var(--text0) !important;
-  border-color: rgba(166, 115, 36, 0.2) !important;
-}
-body.light-theme .quiz-filter-chip.active {
-  background: var(--gold) !important;
-  color: #ffffff !important;
-}
-body.light-theme .quiz-selection-banner,
-body.light-theme .result-breakdown-card,
-body.light-theme .quiz-total-bar {
-  background: #fbf8f2 !important;
-  border-color: rgba(166, 115, 36, 0.25) !important;
-}
-body.light-theme .coffee-card-notes {
-  background: #f3ecde !important;
-}
 body.light-theme .trace-card {
   background: #ffffff !important;
   border: 1px solid rgba(166, 115, 36, 0.25) !important;
@@ -6455,115 +5717,6 @@ body.light-theme .hero-photo-tag i,
   color: #a67324 !important;
 }
 
-/* 3. Quiz & Recomendador - Cero fondos grises */
-body.light-theme .quiz-stepper,
-.light-theme .quiz-stepper {
-  background: #ffffff !important;
-  border-color: rgba(166, 115, 36, 0.25) !important;
-  box-shadow: 0 2px 8px rgba(74, 51, 34, 0.05) !important;
-}
-
-body.light-theme .step-pill,
-.light-theme .step-pill {
-  color: #7a614d !important;
-}
-
-body.light-theme .step-pill.step-active,
-.light-theme .step-pill.step-active {
-  color: #a67324 !important;
-}
-
-body.light-theme .step-pill.step-active span,
-.light-theme .step-pill.step-active span {
-  background: #a67324 !important;
-  color: #ffffff !important;
-}
-
-body.light-theme .step-pill.step-done,
-.light-theme .step-pill.step-done {
-  color: #4a3322 !important;
-}
-
-body.light-theme .step-pill.step-done span,
-.light-theme .step-pill.step-done span {
-  background: rgba(166, 115, 36, 0.18) !important;
-  color: #a67324 !important;
-}
-
-body.light-theme .coffee-card-notes,
-.light-theme .coffee-card-notes {
-  background: #fbf8f2 !important;
-  border-left-color: #a67324 !important;
-  color: #4a3322 !important;
-}
-
-body.light-theme .result-notes-box,
-.light-theme .result-notes-box {
-  background: #fbf8f2 !important;
-  border-left-color: #a67324 !important;
-}
-
-body.light-theme .result-notes-box p,
-.light-theme .result-notes-box p {
-  color: #4a3322 !important;
-}
-
-body.light-theme .result-notes-box small,
-.light-theme .result-notes-box small {
-  color: #a67324 !important;
-}
-
-body.light-theme .result-img-box,
-.light-theme .result-img-box {
-  background: radial-gradient(circle, rgba(214, 159, 72, 0.18) 0%, rgba(246, 241, 232, 0.85) 75%) !important;
-  border-color: rgba(166, 115, 36, 0.25) !important;
-}
-
-body.light-theme .result-pill,
-.light-theme .result-pill {
-  background: #fbf8f2 !important;
-  border-color: rgba(166, 115, 36, 0.2) !important;
-  color: #4a3322 !important;
-}
-
-body.light-theme .result-pill.pill-gold,
-.light-theme .result-pill.pill-gold {
-  background: rgba(166, 115, 36, 0.12) !important;
-  border-color: rgba(166, 115, 36, 0.3) !important;
-  color: #a67324 !important;
-}
-
-body.light-theme .result-title,
-.light-theme .result-title {
-  color: #2b180d !important;
-}
-
-body.light-theme .result-reason,
-.light-theme .result-reason {
-  color: #4a3322 !important;
-}
-
-body.light-theme .breakdown-list li,
-.light-theme .breakdown-list li {
-  border-bottom-color: rgba(74, 51, 34, 0.1) !important;
-  color: #4a3322 !important;
-}
-
-body.light-theme .breakdown-list li span,
-.light-theme .breakdown-list li span {
-  color: #7a614d !important;
-}
-
-body.light-theme .btn-quiz-back,
-.light-theme .btn-quiz-back {
-  color: #7a614d !important;
-}
-
-body.light-theme .btn-quiz-back:hover,
-.light-theme .btn-quiz-back:hover {
-  color: #2b180d !important;
-}
-
 /* 4. Trazabilidad */
 body.light-theme .trace-metric,
 .light-theme .trace-metric {
@@ -7524,130 +6677,44 @@ body.light-theme .carta-tab-btn.active i,
   flex-shrink: 0;
 }
 
-/* Posts Grid */
-.ig-posts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 960px;
+/* Official profile embed: preserve the Kfest frame around Instagram's own content. */
+.ig-embed-shell {
+  max-width: 860px;
   margin: 0 auto;
+  padding: 12px;
+  border: 1px solid var(--gold-bdr);
+  border-radius: 16px;
+  background: rgba(18, 14, 10, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  container-type: inline-size;
 }
 
-.ig-post-card {
+.ig-profile-frame {
   display: block;
-  text-decoration: none;
-  border-radius: 14px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(197, 160, 89, 0.2);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-}
-
-.ig-post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(197, 160, 89, 0.25);
-  border-color: var(--gold);
-}
-
-.ig-post-img-box {
-  position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: #0f0b08;
+  height: 780px;
+  height: max(460px, calc(66.667cqw + 230px));
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color-scheme: light;
 }
 
-.ig-post-img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.45s ease;
-}
-
-.ig-post-card:hover .ig-post-img-box img {
-  transform: scale(1.08);
-}
-
-.ig-post-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-  color: #ffffff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  z-index: 2;
-}
-
-.ig-post-badge.reel {
-  background: rgba(220, 39, 67, 0.85);
-}
-
-.ig-post-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(13, 9, 6, 0.2) 0%, rgba(13, 9, 6, 0.92) 80%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 3;
+.ig-embed-note {
+  max-width: 860px;
+  margin: 16px auto 0;
+  color: var(--text2);
   text-align: center;
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
-
-.ig-post-card:hover .ig-post-overlay {
-  opacity: 1;
-}
-
-.ig-hover-icon {
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 12px;
-  transform: translateY(-8px);
-  transition: transform 0.3s ease;
-}
-
-.ig-post-card:hover .ig-hover-icon {
-  transform: translateY(0);
-}
-
-.ig-post-stats {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.ig-post-stats i {
-  color: var(--gold);
-  margin-right: 4px;
-}
-
-.ig-post-caption {
-  color: rgba(245, 230, 211, 0.92);
-  font-size: 0.78rem;
-  line-height: 1.45;
-  margin: 0;
-  max-width: 90%;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.tiktok-section { border-top: 1px solid var(--gold-bdr); background: var(--bg1); }
+.tiktok-embed-shell { max-width: 860px; margin: 0 auto; padding: 16px; border: 1px solid var(--gold-bdr); border-radius: 16px; background: var(--bg2); box-shadow: 0 10px 30px #0005; }
+.tiktok-embed-shell .tiktok-embed { width: 100%; max-width: 720px; min-width: 0; margin: 0 auto; border: 0; }
+.tiktok-embed-shell iframe { display: block; max-width: 100%; margin: 0 auto; border-radius: 10px; }
+.tiktok-embed-shell a { color: var(--gold); }
+@media (max-width: 600px) {
+  .tiktok-embed-shell { padding: 0; border: 0; overflow: hidden; }
 }
 
 .ig-bottom-action {
@@ -7705,16 +6772,11 @@ body.light-theme .ig-bio-line,
   color: #7a614d !important;
 }
 
-body.light-theme .ig-post-card,
-.light-theme .ig-post-card {
-  border-color: rgba(166, 115, 36, 0.2) !important;
-  box-shadow: 0 8px 24px rgba(74, 51, 34, 0.1) !important;
-}
-
-body.light-theme .ig-post-card:hover,
-.light-theme .ig-post-card:hover {
-  border-color: #a67324 !important;
-  box-shadow: 0 16px 36px rgba(74, 51, 34, 0.16) !important;
+body.light-theme .ig-embed-shell,
+.light-theme .ig-embed-shell {
+  background: #ffffff;
+  border-color: rgba(166, 115, 36, 0.28);
+  box-shadow: 0 10px 30px rgba(74, 51, 34, 0.08);
 }
 
 body.light-theme .instagram-link,
@@ -7733,12 +6795,7 @@ body.light-theme .instagram-link:hover,
 }
 
 /* Mobile Responsive */
-@media (max-width: 860px) {
-  .ig-posts-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-}
+
 
 @media (max-width: 600px) {
   .instagram-section {
@@ -7761,12 +6818,9 @@ body.light-theme .instagram-link:hover,
     width: 100%;
     justify-content: center;
   }
-  .ig-posts-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  .ig-post-caption {
-    font-size: 0.72rem;
+  .ig-embed-shell {
+    padding: 6px;
+    border-radius: 12px;
   }
 }
 
@@ -7866,6 +6920,7 @@ body.light-theme .instagram-link:hover,
 }
 
 .catalog-page-frame {
+  padding: 0;
   position: relative;
   max-width: 620px;
   width: 100%;

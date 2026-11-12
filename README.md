@@ -1,5 +1,30 @@
 # KfestWeb
 
+## Instagram y recursos gráficos
+
+La sección de Instagram incrusta el perfil público oficial de
+[@kfest.peru](https://www.instagram.com/kfest.peru/) mediante
+`https://www.instagram.com/kfest.peru/embed/`, conservando la cabecera y el marco
+de Kfest. Instagram entrega su contenido al cargar el marco: no se mantienen
+publicaciones ni estadísticas copiadas en el proyecto. No requiere un token de
+Meta. El diseño interior, la selección y la cantidad de publicaciones dependen de
+Instagram; el perfil incrustado observado muestra seis publicaciones, no nueve.
+La cuenta debe ser pública y permitir inserciones. Siempre queda disponible un
+enlace para abrir el perfil si el navegador o Instagram impiden cargarlo.
+
+El favicon reutiliza `public/images/logo_marron.png`, el logo oficial de Kfest.
+
+Para comprobar imágenes sin uso y referencias rotas:
+
+```bash
+npm run assets:audit
+```
+
+La auditoría recorre los archivos fuente, considera referencias dentro de SVG y
+preserva los directorios usados por rutas dinámicas, como `images/carta/`.
+Verifica además que existan las siete páginas declaradas en `catalogPageList`.
+El inventario de archivos retirados está en `docs/asset-cleanup.json`.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
 
 ## Development server

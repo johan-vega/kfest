@@ -42,6 +42,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+README.md
+BARISTA_LAB.md
 
 # Temporary raw downloads
 public/images/drive/

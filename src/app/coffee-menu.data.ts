@@ -24,25 +24,7 @@ export interface CoffeeMenuItem {
   badge?: { es: string; en: string };
   isRecommended?: boolean;
   img?: string;
-  allowsMilk?: boolean;
-  isPack?: boolean;
   schedule?: string;
-}
-
-export interface QuizOption {
-  id: string;
-  name: { es: string; en: string };
-  price: number;
-  desc?: { es: string; en: string };
-  icon?: string;
-}
-
-export interface CategoryCard {
-  id: CoffeeCategoryKey;
-  name: { es: string; en: string };
-  desc: { es: string; en: string };
-  icon: string;
-  tag: { es: string; en: string };
 }
 
 export interface CartaCategoryTab {
@@ -63,159 +45,6 @@ export const CARTA_CATEGORIES: CartaCategoryTab[] = [
   { id: 'bar_kfest', name: { es: 'Bar Kfest', en: 'Coffee Bar' }, icon: 'fa-solid fa-martini-glass-citrus' },
   { id: 'virtudes', name: { es: 'Línea Virtudes', en: 'Virtues Line' }, icon: 'fa-solid fa-seedling' }
 ];
-
-export const QUIZ_CATEGORIES: CategoryCard[] = [
-  {
-    id: 'calientes',
-    name: { es: 'Bebidas Calientes', en: 'Warm Classics' },
-    desc: {
-      es: 'Espresso, Americano, Capuchino, Latte, Mokaccino, Bombón... El calor reconfortante de la barra.',
-      en: 'Espresso, Americano, Cappuccino, Latte, Mochaccino... Warm comforting coffee bar classics.'
-    },
-    icon: 'fa-solid fa-mug-hot',
-    tag: { es: 'Desde S/ 8.00', en: 'From S/ 8.00' }
-  },
-  {
-    id: 'iced',
-    name: { es: 'Cafés Helados (Iced)', en: 'Iced Coffee' },
-    desc: {
-      es: 'Iced Coffee, Capuchino Helado, Vanilla Latte, Caramel y Avellana con cubos de hielo.',
-      en: 'Iced Coffee, Iced Cappuccino, Vanilla, Caramel and Hazelnut Latte over crisp ice.'
-    },
-    icon: 'fa-solid fa-snowflake',
-    tag: { es: 'Desde S/ 12.00', en: 'From S/ 12.00' }
-  },
-  {
-    id: 'cold_brew',
-    name: { es: 'Cold Brew de Autor', en: 'Signature Cold Brew' },
-    desc: {
-      es: '18 horas de extracción lenta en frío. Iced Cold Brew, Orange Coffee y Cold Brew Maracuyá.',
-      en: '18 hours slow cold extraction. Iced Cold Brew, Orange Coffee and Passionfruit Cold Brew.'
-    },
-    icon: 'fa-solid fa-glass-water',
-    tag: { es: 'S/ 14.00 · 18h frío', en: 'S/ 14.00 · 18h brew' }
-  },
-  {
-    id: 'frappes',
-    name: { es: 'Frappés & Shakes', en: 'Frappes & Shakes' },
-    desc: {
-      es: 'Hielo granizado con chantilly: Oreo, Chocolate, Caramelo, Algarrobina, Fresa, Shakes y Chin Chin.',
-      en: 'Blended ice & whipped cream: Oreo, Chocolate, Caramel, Algarrobina, Strawberry, Shakes or Chin Chin.'
-    },
-    icon: 'fa-solid fa-blender',
-    tag: { es: 'Desde S/ 15.00', en: 'From S/ 15.00' }
-  },
-  {
-    id: 'filtrados',
-    name: { es: 'Filtrados de Especialidad', en: 'Specialty Pour Over' },
-    desc: {
-      es: 'Mupeco patrimonial de la selva, V60 japonesa, Chemex, Prensa Francesa y Ritual Virtudes.',
-      en: 'Peruvian Mupeco, Japanese V60, Chemex, French Press and the 3-cup Virtues Ritual.'
-    },
-    icon: 'fa-solid fa-filter',
-    tag: { es: 'Desde S/ 9.00', en: 'From S/ 9.00' }
-  },
-  {
-    id: 'desayunos_combos',
-    name: { es: 'Desayunos & Combos', en: 'Breakfast & Combos' },
-    desc: {
-      es: 'Parisino, Fish, Amanecer y combos con Pan del Sur, Croissants rellenos y Brownie.',
-      en: 'Parisian, Fish, Sunrise breakfasts and combos with Southern bread, stuffed croissants and brownies.'
-    },
-    icon: 'fa-solid fa-sun',
-    tag: { es: 'Desde S/ 13.00', en: 'From S/ 13.00' }
-  },
-  {
-    id: 'panaderia_postres',
-    name: { es: 'Panadería & Postres', en: 'Bakery & Sweets' },
-    desc: {
-      es: 'Pan del Sur artesanal, Croissants de pollo, atún o jamón y queso, Brownies y Affogatos.',
-      en: 'Artisan Southern bread, chicken, tuna or ham & cheese croissants, brownies, and affogatos.'
-    },
-    icon: 'fa-solid fa-bread-slice',
-    tag: { es: 'Desde S/ 3.00', en: 'From S/ 3.00' }
-  },
-  {
-    id: 'bar_kfest',
-    name: { es: 'Bar Kfest (Coctelería)', en: 'Kfest Coffee Bar' },
-    desc: {
-      es: 'Coffee Sour con pisco peruano, Baileys Affogato, Menta Coffee y Wine Coffee de autor.',
-      en: 'Coffee Sour with Peruvian pisco, Baileys Affogato, Mint Coffee and Wine Coffee creations.'
-    },
-    icon: 'fa-solid fa-martini-glass-citrus',
-    tag: { es: 'S/ 17.00 c/u', en: 'S/ 17.00 each' }
-  },
-  {
-    id: 'virtudes',
-    name: { es: 'Línea Virtudes (Café en Bolsa)', en: 'Virtues Coffee Bags' },
-    desc: {
-      es: 'Bolsas de Geisha, Bourbon, Caturra de Chanchamayo (1,300 a 1,750 msnm) para preparar en casa.',
-      en: 'Fresh roasted whole bean / ground specialty bags from Chanchamayo (1300-1750m) for home.'
-    },
-    icon: 'fa-solid fa-seedling',
-    tag: { es: 'Desde S/ 30.00', en: 'From S/ 30.00' }
-  }
-];
-
-export const QUIZ_FLAVOR_FILTERS: Record<
-  CoffeeCategoryKey,
-  { id: string; label: { es: string; en: string } }[]
-> = {
-  calientes: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'intenso', label: { es: 'Intenso & Solo', en: 'Bold & Black' } },
-    { id: 'cremoso', label: { es: 'Cremoso con Leche', en: 'Creamy Milk' } },
-    { id: 'dulce', label: { es: 'Dulce & Chocolate', en: 'Sweet & Chocolate' } }
-  ],
-  desayunos_combos: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'desayuno', label: { es: 'Desayunos (8-11 AM)', en: 'Breakfasts (8-11 AM)' } },
-    { id: 'combo', label: { es: 'Combos Todo el Día', en: 'All-Day Combos' } }
-  ],
-  filtrados: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'tradicional', label: { es: 'Tradición Selva (Mupeco)', en: 'Rainforest Heritage' } },
-    { id: 'floral', label: { es: 'Taza Limpia (V60 / Chemex)', en: 'Clean & Floral' } },
-    { id: 'intenso', label: { es: 'Inmersión (Prensa)', en: 'Full Immersion' } },
-    { id: 'especial', label: { es: 'Ritual 3 Cafés', en: '3-Cup Ritual' } }
-  ],
-  iced: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'intenso', label: { es: 'Negro & Helado', en: 'Black & Iced' } },
-    { id: 'cremoso', label: { es: 'Cremoso con Leche', en: 'Milky Cold' } },
-    { id: 'dulce', label: { es: 'Dulce con Siropes', en: 'Flavored Sweets' } }
-  ],
-  frappes: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'dulce', label: { es: 'Oreo & Goloso', en: 'Oreo & Sweets' } },
-    { id: 'cremoso', label: { es: 'Cafetero', en: 'Coffee Rich' } },
-    { id: 'frutal', label: { es: 'Shakes & Frutales', en: 'Shakes & Fruity' } }
-  ],
-  cold_brew: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'intenso', label: { es: 'Puro Clásico', en: 'Classic Pure' } },
-    { id: 'frutal', label: { es: 'Cítrico & Tropical', en: 'Citrus & Tropical' } },
-    { id: 'envasada', label: { es: 'Botella para Llevar', en: 'To-Go Bottle' } }
-  ],
-  panaderia_postres: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'salado', label: { es: 'Panadería Salada', en: 'Savory Bakery' } },
-    { id: 'dulce', label: { es: 'Postres & Dulces', en: 'Desserts & Sweets' } }
-  ],
-  bar_kfest: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'especial', label: { es: 'Con Pisco o Vino', en: 'Pisco or Wine' } },
-    { id: 'dulce', label: { es: 'Con Baileys & Helado', en: 'Baileys & Gelato' } },
-    { id: 'frutal', label: { es: 'Menta & Refrescante', en: 'Mint & Refreshing' } }
-  ],
-  virtudes: [
-    { id: 'todos', label: { es: 'Todos', en: 'All' } },
-    { id: 'floral', label: { es: 'Geisha & Floral', en: 'Geisha & Floral' } },
-    { id: 'intenso', label: { es: 'Cacao & Tueste Medio-Alto', en: 'Cacao & Medium-Dark' } },
-    { id: 'frutal', label: { es: 'Frutal & Cítrico Suave', en: 'Fruity & Soft Citrus' } },
-    { id: 'dulce', label: { es: 'Toffee & Panela', en: 'Toffee & Panela' } }
-  ]
-};
 
 export const COFFEE_MENU: CoffeeMenuItem[] = [
   // ==================== 1. BEBIDAS CALIENTES (Pág. 2) ====================
@@ -298,7 +127,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     icon: 'fa-solid fa-mug-hot',
     isRecommended: true,
     badge: { es: '⭐ El Más Pedido', en: '⭐ Best Seller' },
-    allowsMilk: true
   },
   {
     id: 'cafe_latte',
@@ -318,7 +146,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Gentle on the palate, creamy toffee undertones, extremely smooth.'
     },
     icon: 'fa-solid fa-mug-saucer',
-    allowsMilk: true
   },
   {
     id: 'mokaccino',
@@ -338,7 +165,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: '70% rich cacao blend, velvety milk cream, and high-altitude espresso vigor.'
     },
     icon: 'fa-solid fa-cookie-bite',
-    allowsMilk: true
   },
   {
     id: 'cafe_bombon',
@@ -358,7 +184,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Deep caramelized sweetness, layered visual delight, and indulgent full body.'
     },
     icon: 'fa-solid fa-jar-wheat',
-    allowsMilk: true
   },
   {
     id: 'babyccino',
@@ -378,7 +203,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: '0% caffeine, golden algarrobina aroma, gentle and comforting.'
     },
     icon: 'fa-solid fa-heart',
-    allowsMilk: true
   },
 
   // ==================== 2. DESAYUNOS & COMBOS (Pág. 2) ====================
@@ -658,7 +482,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Creamy chilled texture with balanced sweetness to beat the heat.'
     },
     icon: 'fa-solid fa-glass-water',
-    allowsMilk: true
   },
   {
     id: 'vanilla_latte',
@@ -678,7 +501,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Delicate vanilla fragrance, milky softness, and fresh balance.'
     },
     icon: 'fa-solid fa-wand-magic-sparkles',
-    allowsMilk: true
   },
   {
     id: 'caramel_latte',
@@ -698,7 +520,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Sweet caramel ribbons, roasted toffee, and flawless coffee harmony.'
     },
     icon: 'fa-solid fa-jar-wheat',
-    allowsMilk: true
   },
   {
     id: 'iced_mokaccino',
@@ -720,7 +541,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     icon: 'fa-solid fa-ice-cream',
     isRecommended: true,
     badge: { es: '⭐ Recomendado', en: '⭐ Recommended' },
-    allowsMilk: true
   },
   {
     id: 'avellana_latte',
@@ -740,7 +560,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
       en: 'Roasted praline notes, nutty fragrance, and velvety chilled body.'
     },
     icon: 'fa-solid fa-cubes-stacked',
-    allowsMilk: true
   },
 
   // ==================== 5. SHAKE & FRAPPES (Pág. 3) ====================
@@ -1337,7 +1156,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-seedling',
     badge: { es: 'Tueste Canela', en: 'Cinnamon Roast' },
-    isPack: true
   },
   {
     id: 'virtud_fortaleza',
@@ -1358,7 +1176,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-fire',
     badge: { es: '1,750 msnm', en: '1,750 masl' },
-    isPack: true
   },
   {
     id: 'virtud_fe',
@@ -1379,7 +1196,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-dove',
     badge: { es: 'Catuai Dulce', en: 'Sweet Catuai' },
-    isPack: true
   },
   {
     id: 'virtud_amor',
@@ -1400,7 +1216,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-heart',
     badge: { es: 'Frutal & Chocolate', en: 'Fruity & Choc' },
-    isPack: true
   },
   {
     id: 'virtud_paciencia',
@@ -1421,7 +1236,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-clock',
     badge: { es: 'Tueste Medio-Alto', en: 'Medium-Dark' },
-    isPack: true
   },
   {
     id: 'virtud_resiliencia',
@@ -1443,7 +1257,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     icon: 'fa-solid fa-crown',
     isRecommended: true,
     badge: { es: '⭐ Geisha Exclusivo', en: '⭐ Rare Geisha' },
-    isPack: true
   },
   {
     id: 'virtud_tolerancia',
@@ -1464,7 +1277,6 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-handshake',
     badge: { es: 'Blend 1,750m', en: '1,750m Blend' },
-    isPack: true
   },
   {
     id: 'virtud_coldbrew_pack',
@@ -1485,137 +1297,5 @@ export const COFFEE_MENU: CoffeeMenuItem[] = [
     },
     icon: 'fa-solid fa-glass-water',
     badge: { es: '18 Horas', en: '18 Hours' },
-    isPack: true
-  }
-];
-
-export const QUIZ_MILK_OPTIONS: QuizOption[] = [
-  {
-    id: 'leche_entera',
-    name: { es: 'Leche Entera Cremosa', en: 'Fresh Whole Milk' },
-    price: 0,
-    desc: { es: 'Receta clásica de la casa (Incluido)', en: 'Classic house recipe (Included)' },
-    icon: 'fa-solid fa-cow'
-  },
-  {
-    id: 'leche_deslactosada',
-    name: { es: 'Leche Deslactosada', en: 'Lactose-Free Milk' },
-    price: 3,
-    desc: { es: 'Más ligera y fácil de digerir (+ S/ 3.00)', en: 'Lighter and easy on digestion (+ S/ 3.00)' },
-    icon: 'fa-solid fa-droplet'
-  },
-  {
-    id: 'leche_almendras',
-    name: { es: 'Leche de Almendras', en: 'Almond Milk' },
-    price: 5,
-    desc: { es: '100% vegetal con notas sutiles a frutos secos (+ S/ 5.00)', en: '100% plant-based with nutty undertones (+ S/ 5.00)' },
-    icon: 'fa-solid fa-seedling'
-  }
-];
-
-export const QUIZ_GRIND_OPTIONS: QuizOption[] = [
-  {
-    id: 'grano',
-    name: { es: 'En Grano Entero', en: 'Whole Bean' },
-    price: 0,
-    desc: { es: 'Conserva al máximo los aceites aromáticos para moler en casa', en: 'Locks in aromatic oils to grind fresh at home' },
-    icon: 'fa-solid fa-seedling'
-  },
-  {
-    id: 'molido_medio',
-    name: { es: 'Molienda Media (V60 / Gota a Gota / Filtro)', en: 'Medium Grind (Pour Over / Drip)' },
-    price: 0,
-    desc: { es: 'Calibrada para extracción dulce y aromática', en: 'Calibrated for sweet aromatic extraction' },
-    icon: 'fa-solid fa-filter'
-  },
-  {
-    id: 'molido_grueso',
-    name: { es: 'Molienda Gruesa (Prensa Francesa / Cold Brew)', en: 'Coarse Grind (French Press / Cold Brew)' },
-    price: 0,
-    desc: { es: 'Ideal para inmersión sin sedimentos finos', en: 'Ideal for full immersion without sediments' },
-    icon: 'fa-solid fa-mug-hot'
-  },
-  {
-    id: 'molido_fino',
-    name: { es: 'Molienda Fina (Espresso / Moka Italiana)', en: 'Fine Grind (Espresso / Moka Pot)' },
-    price: 0,
-    desc: { es: 'Textura de azúcar impalpable para alta presión', en: 'Fine texture calibrated for stovetop or machine pressure' },
-    icon: 'fa-solid fa-fire-burner'
-  }
-];
-
-export const QUIZ_SPECIAL_OPTIONS: QuizOption[] = [
-  {
-    id: 'clasica',
-    name: { es: 'Receta Clásica de Barista', en: 'Barista Classic Recipe' },
-    price: 0,
-    desc: { es: 'Proporciones exactas recomendadas por el barista (Incluido)', en: 'Exact recipe recommended by the barista (Included)' },
-    icon: 'fa-solid fa-star'
-  },
-  {
-    id: 'extra_shot',
-    name: { es: 'Shot Extra de Espresso (+ S/ 8.00)', en: 'Extra Espresso Shot (+ S/ 8.00)' },
-    price: 8,
-    desc: { es: '+1 shot de espresso recién calibrado para mayor potencia', en: '+1 fresh espresso shot for maximum kick' },
-    icon: 'fa-solid fa-bolt'
-  },
-  {
-    id: 'sirope',
-    name: { es: 'Shot de Sirope Artesanal (+ S/ 3.00)', en: 'Artisan Syrup Shot (+ S/ 3.00)' },
-    price: 3,
-    desc: { es: 'Toque dulce de vainilla, caramelo o avellana', en: 'Sweet touch of vanilla, caramel or hazelnut' },
-    icon: 'fa-solid fa-cookie'
-  }
-];
-
-export const QUIZ_FOOD_OPTIONS: QuizOption[] = [
-  {
-    id: 'none',
-    name: { es: 'Solo mi café', en: 'Just my coffee' },
-    price: 0,
-    desc: { es: 'Disfrutar mi bebida o café sin adicionales', en: 'Enjoy my drink with no food pairing' },
-    icon: 'fa-solid fa-circle-check'
-  },
-  {
-    id: 'pan_sur',
-    name: { es: 'Pan del Sur Artesanal (+ S/ 7.00)', en: 'Artisan Southern Bread (+ S/ 7.00)' },
-    price: 7,
-    desc: { es: 'Pan artesanal con aceituna, mixto o queso paria', en: 'Artisan bread with olives, ham & cheese or paria cheese' },
-    icon: 'fa-solid fa-bread-slice'
-  },
-  {
-    id: 'croissant_mixto',
-    name: { es: 'Croissant Mixto Caliente (+ S/ 12.00)', en: 'Warm Ham & Cheese Croissant (+ S/ 12.00)' },
-    price: 12,
-    desc: { es: 'Hojaldre mantequilloso relleno de jamón y queso derretido', en: 'Buttery flaky pastry filled with melted ham and cheese' },
-    icon: 'fa-solid fa-bacon'
-  },
-  {
-    id: 'croissant_pollo',
-    name: { es: 'Croissant de Pollo (+ S/ 15.00)', en: 'Chicken Pecan Croissant (+ S/ 15.00)' },
-    price: 15,
-    desc: { es: 'Relleno de pollo jugoso, apio fresco, mayonesa y pecanas', en: 'Shredded chicken, fresh celery, homemade mayo and pecans' },
-    icon: 'fa-solid fa-drumstick-bite'
-  },
-  {
-    id: 'croissant_atun',
-    name: { es: 'Croissant de Atún (+ S/ 15.00)', en: 'Tuna & Egg Croissant (+ S/ 15.00)' },
-    price: 15,
-    desc: { es: 'Relleno de atún selecto, huevo duro y mayonesa', en: 'Tuna, hard-boiled egg and homemade mayo' },
-    icon: 'fa-solid fa-fish'
-  },
-  {
-    id: 'brownie',
-    name: { es: 'Brownie Extra Chocolatoso (+ S/ 3.00)', en: 'Fudge Chocolate Brownie (+ S/ 3.00)' },
-    price: 3,
-    desc: { es: 'Brownie húmedo de puro chocolate bitter', en: 'Moist rich fudge brownie made with pure cacao' },
-    icon: 'fa-solid fa-cookie-bite'
-  },
-  {
-    id: 'croissant_dulce',
-    name: { es: 'Croissant Dulce (+ S/ 12.00)', en: 'Sweet Filled Croissant (+ S/ 12.00)' },
-    price: 12,
-    desc: { es: 'Relleno de caramelo glaseado o chocolate con pecanas', en: 'Filled with dulce de leche caramel or chocolate & pecans' },
-    icon: 'fa-solid fa-cake-candles'
   }
 ];
