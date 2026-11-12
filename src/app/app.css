@@ -2022,6 +2022,7 @@
 }
 .email {
   display: block;
+  overflow-wrap: anywhere;
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text0);

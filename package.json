@@ -5,37 +5,44 @@
     "ng": "ng",
     "start": "ng serve",
     "dev": "ng serve",
-    "build": "ng build",
+    "build": "node scripts/build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "assets:audit": "node scripts/audit-assets.mjs --check",
-    "serve:ssr:kfest-web": "node dist/kfest-web/server/server.mjs"
+    "build:angular": "ng build",
+    "test:seo": "node --test scripts/seo-config.test.mjs",
+    "check:build": "node scripts/verify-static-build.mjs",
+    "preview": "node scripts/serve-static.mjs"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
   "dependencies": {
-    "@angular/common": "^22.1.0",
-    "@angular/compiler": "^22.1.0",
-    "@angular/core": "^22.1.0",
-    "@angular/forms": "^22.1.0",
-    "@angular/platform-browser": "^22.1.0",
-    "@angular/platform-server": "^22.1.0",
-    "@angular/router": "^22.1.0",
-    "@angular/ssr": "^22.1.8",
+    "@angular/common": "22.2.6",
+    "@angular/compiler": "22.2.6",
+    "@angular/core": "22.2.6",
+    "@angular/forms": "22.2.6",
+    "@angular/platform-browser": "22.2.6",
+    "@angular/platform-server": "22.2.6",
+    "@angular/router": "22.2.6",
+    "@angular/ssr": "22.2.7",
     "@fortawesome/fontawesome-free": "^7.3.1",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^22.1.8",
-    "@angular/cli": "^22.1.8",
-    "@angular/compiler-cli": "^22.1.0",
+    "@angular/build": "22.2.7",
+    "@angular/cli": "22.2.7",
+    "@angular/compiler-cli": "22.2.6",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"
+  },
+  "engines": {
+    "node": ">=24.15.0 <25",
+    "npm": ">=11.12.1 <12"
   }
 }

@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { afterNextRender, AfterViewInit, Component, ElementRef, HostListener, Inject, OnDestroy, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CoffeeMenuItem, COFFEE_MENU } from './coffee-menu.data';
 import { ImageViewer } from './image-viewer';
 import {
@@ -389,9 +389,12 @@ export class App implements AfterViewInit, OnDestroy {
   ];
 
   constructor(
-    @Inject(PLATFORM_ID) private readonly platformId: object
+    @Inject(PLATFORM_ID) private readonly platformId: object,
+    private readonly changeDetector: ChangeDetectorRef
   ) {
     afterNextRender(() => {
+      this.restoreSavedPreferences();
+      this.changeDetector.markForCheck();
       // TikTok's official creator embed script runs only after the browser view exists.
       // Keep the blockquote fallback link usable if the provider is unavailable.
       if (document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) return;
@@ -400,6 +403,9 @@ export class App implements AfterViewInit, OnDestroy {
       script.async = true;
       document.body.appendChild(script);
     });
+  }
+
+  private restoreSavedPreferences(): void {
     if (typeof window !== 'undefined') {
       try {
         const saved = localStorage.getItem('kfest_theme');
@@ -594,6 +600,7 @@ export class App implements AfterViewInit, OnDestroy {
 
   changeLanguage(lang: Language): void {
     this.language = lang;
+    if (typeof document !== 'undefined') document.documentElement.lang = lang;
   }
 
   setGrind(grind: GrindType): void {

@@ -7,7 +7,7 @@
       <a href="#inicio" class="brand" (click)="scrollToSection('inicio', $event)"
         [attr.aria-label]="language === 'es' ? 'Kfest - Inicio' : 'Kfest - Home'">
         <img [src]="isLightMode ? 'images/logo_marron.png' : 'images/Logo_Oficial.png'" alt="Kfest Logo"
-          class="brand-logo-img" />
+          class="brand-logo-img" decoding="async" />
       </a>
 
       <nav class="nav-links" [class.open]="mobileMenuOpen">
@@ -92,7 +92,7 @@
     <section id="inicio" class="hero">
       <div class="hero-bg-wrap">
         <img src="images/New-Hero.jpg" alt="Doña Teresa Chávez - Kfest Café de Especialidad" class="hero-bg-img"
-          aria-hidden="true" />
+          aria-hidden="true" decoding="async" fetchpriority="high" />
         <div class="hero-overlay"></div>
       </div>
 
@@ -186,101 +186,101 @@
           <div class="album-eyebrow">
             <span class="album-badge"><i class="fa-solid fa-film"></i> {{ language === 'es' ? 'ÁLBUM DEL VIAJE' :
               'JOURNEY ALBUM' }}</span>
-            <h3 class="album-title">{{ language === 'es' ? 'El Regreso al Fundo Santa Teresita' : 'The Return to Fundo
-              Santa Teresita' }}</h3>
+            <h2 class="album-title">{{ language === 'es' ? 'El Regreso al Fundo Santa Teresita' : 'The Return to Fundo
+              Santa Teresita' }}</h2>
           </div>
 
           <!-- Carrusel -->
           <div class="album-slider" #albumSlider>
             <div class="album-slide">
-              <img src="images/legacy/01_estacion_autobus.jpg" alt="La estación de autobús — inicio del viaje" />
+              <img src="images/legacy/01_estacion_autobus.jpg" alt="La estación de autobús — inicio del viaje" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '① La estación de autobús — inicio del viaje' : '①
                 The bus station — start of the journey' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/02_bus_camino.jpg" alt="Dentro del bus camino a la Chacra" />
+              <img src="images/legacy/02_bus_camino.jpg" alt="Dentro del bus camino a la Chacra" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '② Dentro del bus rumbo a la Chacra Santa
                 Teresita' : '② Inside the bus heading to Chacra Santa Teresita' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/03_cuartito_vivienda.jpg" alt="El cuartito de vivienda en el fundo" />
+              <img src="images/legacy/03_cuartito_vivienda.jpg" alt="El cuartito de vivienda en el fundo" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '③ El cuartito de vivienda — refugio en el fundo'
                 : '③ The little room — our refuge at the farm' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/04_descenso.jpg" alt="Empezamos el descenso por las laderas" />
+              <img src="images/legacy/04_descenso.jpg" alt="Empezamos el descenso por las laderas" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '④ Empezamos el descenso por las laderas de
                 Chanchamayo' : '④ We begin the descent through the slopes of Chanchamayo' }}</div>
             </div>
             <div class="album-slide album-slide-featured">
-              <img src="images/legacy/05_cabanita.jpg" alt="Por fin en la cabañita en la chacra" />
+              <img src="images/legacy/05_cabanita.jpg" alt="Por fin en la cabañita en la chacra" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑤ «Por fin en la cabañita en la chacra» — el
                 reencuentro con la tierra' : '⑤ "Finally at the little cabin at the farm" — reconnecting with the land'
                 }}</div>
             </div>
             <div class="album-slide album-slide-featured">
-              <img src="images/legacy/06_abuelos_teresa_silvino.jpg" alt="Mis abuelos, Teresa y Silvino" />
+              <img src="images/legacy/06_abuelos_teresa_silvino.jpg" alt="Mis abuelos, Teresa y Silvino" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑥ Mis abuelos, Doña Teresa y Don Silvino —
                 fundadores del legado' : '⑥ My grandparents, Doña Teresa and Don Silvino — founders of the legacy' }}
               </div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/07_bayas_verdes.jpg" alt="Bayas verdes de café, por madurar" />
+              <img src="images/legacy/07_bayas_verdes.jpg" alt="Bayas verdes de café, por madurar" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑦ Bayas verdes de café, por madurar — la promesa
                 de la cosecha' : '⑦ Green coffee berries yet to ripen — the harvest promise' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/08_bayas_madurando.jpg" alt="Bayas verdes madurando en la planta" />
+              <img src="images/legacy/08_bayas_madurando.jpg" alt="Bayas verdes madurando en la planta" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑧ Bayas madurando en la planta — carmesí vivos a
                 1,600 msnm' : '⑧ Berries ripening on the plant — vivid crimson at 1,600 masl' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_01.jpg" alt="En camino por la selva central" />
+              <img src="images/legacy/album_01.jpg" alt="En camino por la selva central" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑨ En camino por las trochas de la selva central'
                 : '⑨ On the path through the central jungle trails' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_02.jpg" alt="Paisajes y verdor de Chanchamayo" />
+              <img src="images/legacy/album_02.jpg" alt="Paisajes y verdor de Chanchamayo" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑩ Paisajes y verdor infinito de Chanchamayo' : '⑩
                 Landscapes and endless greenery of Chanchamayo' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_03.jpg" alt="La vida cotidiana en la chacra" />
+              <img src="images/legacy/album_03.jpg" alt="La vida cotidiana en la chacra" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑪ La vida cotidiana y calma en la chacra' : '⑪
                 Daily life and serenity at the farm' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_04.jpg" alt="Sendero hacia las parcelas altas" />
+              <img src="images/legacy/album_04.jpg" alt="Sendero hacia las parcelas altas" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑫ Sendero escarpado hacia las parcelas altas' :
                 '⑫ Steep trail towards the high-altitude plots' }}</div>
             </div>
             <div class="album-slide album-slide-featured">
-              <img src="images/legacy/album_05.jpg" alt="Amanecer en el Fundo Santa Teresita" />
+              <img src="images/legacy/album_05.jpg" alt="Amanecer en el Fundo Santa Teresita" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑬ Amanecer brumoso en el Fundo Santa Teresita' :
                 '⑬ Misty sunrise at Fundo Santa Teresita' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_06.jpg" alt="Caminata matutina entre los cafetos" />
+              <img src="images/legacy/album_06.jpg" alt="Caminata matutina entre los cafetos" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑭ Caminata matutina de supervisión entre los
                 cafetos' : '⑭ Morning inspection walk among the coffee trees' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_07.jpg" alt="Cuidado manual de los arbustos" />
+              <img src="images/legacy/album_07.jpg" alt="Cuidado manual de los arbustos" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑮ Cuidado manual y poda de los arbustos de café'
                 : '⑮ Hands-on pruning and care of the coffee shrubs' }}</div>
             </div>
             <div class="album-slide album-slide-featured">
-              <img src="images/legacy/album_08.jpg" alt="Inspección de frutos selectos" />
+              <img src="images/legacy/album_08.jpg" alt="Inspección de frutos selectos" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑯ Inspección de frutos selectos en la ladera' :
                 '⑯ Inspecting select cherries on the mountain slope' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_09.jpg" alt="Tradición viva en cada rincón" />
+              <img src="images/legacy/album_09.jpg" alt="Tradición viva en cada rincón" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑰ Tradición cafetalera viva en cada rincón' : '⑰
                 Living coffee tradition in every corner of the estate' }}</div>
             </div>
             <div class="album-slide">
-              <img src="images/legacy/album_10.jpg" alt="El corazón de Kfest en la montaña" />
+              <img src="images/legacy/album_10.jpg" alt="El corazón de Kfest en la montaña" loading="lazy" decoding="async" />
               <div class="album-slide-caption">{{ language === 'es' ? '⑱ El corazón de Kfest en lo alto de la montaña' :
                 '⑱ The heart of Kfest high in the mountains' }}</div>
             </div>
@@ -378,7 +378,7 @@
           @for (step of processSteps; track step.num) {
           <div class="process-step-card">
             <div class="process-step-num">{{ step.num }}</div>
-            <img [src]="step.img" [alt]="step.alt" />
+            <img [src]="step.img" [alt]="step.alt" loading="lazy" decoding="async" />
             <div class="process-step-label">{{ language === 'es' ? step.es : step.en }}</div>
           </div>
           }
@@ -386,7 +386,7 @@
           @for (step of processSteps; track 'loop-' + step.num) {
           <div class="process-step-card" aria-hidden="true">
             <div class="process-step-num">{{ step.num }}</div>
-            <img [src]="step.img" [alt]="step.alt" />
+            <img [src]="step.img" [alt]="step.alt" loading="lazy" decoding="async" />
             <div class="process-step-label">{{ language === 'es' ? step.es : step.en }}</div>
           </div>
           }
@@ -416,7 +416,7 @@
           <div class="ig-profile-left">
             <div class="ig-avatar-wrap">
               <img [src]="isLightMode ? 'images/logo_marron.png' : 'images/Logo_Oficial.png'" alt="Kfest Logo"
-                class="ig-avatar-img" />
+                class="ig-avatar-img" loading="lazy" decoding="async" />
               <span class="ig-verified-badge" title="Cuenta Oficial"><i class="fa-solid fa-check"></i></span>
             </div>
             <div class="ig-profile-info">
@@ -525,7 +525,7 @@
               (touchstart)="onCatalogTouchStart($event)" (touchend)="onCatalogTouchEnd($event)">
               <img [src]="'images/carta/' + currentCatalogPage + '.png'"
                 [alt]="'Página ' + currentCatalogPage + ' - ' + (catalogPageTitles[currentCatalogPage] ? (language === 'es' ? catalogPageTitles[currentCatalogPage].es : catalogPageTitles[currentCatalogPage].en) : '')"
-                class="catalog-main-img" />
+                class="catalog-main-img" loading="lazy" decoding="async" />
               <span class="catalog-zoom-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8"></circle>
@@ -590,7 +590,7 @@
                 <span>{{ language === 'es' ? 'Consultar / Pedir de esta Página' : 'Order From This Page' }}</span>
               </a>
 
-              <a href="carta_kfest.pdf" download="Carta_Oficial_Kfest.pdf" target="_blank"
+              <a href="carta_kfest.pdf" download="Carta_Oficial_Kfest.pdf" target="_blank" rel="noopener noreferrer"
                 class="btn btn-secondary catalog-download-btn">
                 <i class="fa-solid fa-download"></i>
                 <span>{{ language === 'es' ? 'Descargar PDF Original' : 'Download Original PDF' }}</span>
@@ -603,7 +603,7 @@
             @for (p of catalogPageList; track p) {
             <div class="catalog-thumb-item" [class.active]="currentCatalogPage === p" [attr.data-page]="p"
               (click)="setCatalogPage(p)">
-              <img [src]="'images/carta/' + p + '.png'" [alt]="'Pág ' + p" />
+              <img [src]="'images/carta/' + p + '.png'" [alt]="'Pág ' + p" loading="lazy" decoding="async" />
               <span class="catalog-thumb-badge">{{ p }}</span>
             </div>
             }
@@ -642,12 +642,12 @@
 
           <div class="cata-format-tabs">
             <button class="format-tab" [class.active]="selectedCataFormat === 'grano'" (click)="setCataFormat('grano')">
-              <img src="images/cata_grano.png" alt="En Grano" />
+              <img src="images/cata_grano.png" alt="En Grano" loading="lazy" decoding="async" />
               <span>{{ language === 'es' ? 'EN GRANO' : 'WHOLE BEAN' }}</span>
             </button>
             <button class="format-tab" [class.active]="selectedCataFormat === 'molido'"
               (click)="setCataFormat('molido')">
-              <img src="images/cata_molido.png" alt="Molido" />
+              <img src="images/cata_molido.png" alt="Molido" loading="lazy" decoding="async" />
               <span>{{ language === 'es' ? 'MOLIDO' : 'GROUND' }}</span>
             </button>
           </div>
@@ -979,19 +979,19 @@
             <div class="brew-gear-row">
               <div class="gear-item gear-active">
                 <div class="gear-img-box">
-                  <img src="images/barista/balanza.png" alt="Balanza digital de precisión" />
+                  <img src="images/barista/balanza.png" alt="Balanza digital de precisión" loading="lazy" decoding="async" />
                 </div>
                 <small>{{ language === 'es' ? 'Balanza Digital' : 'Digital Scale' }}</small>
               </div>
               <div class="gear-item gear-active">
                 <div class="gear-img-box">
-                  <img src="images/barista/aguja_madera.png" alt="Aguja WDT de madera" />
+                  <img src="images/barista/aguja_madera.png" alt="Aguja WDT de madera" loading="lazy" decoding="async" />
                 </div>
                 <small>{{ language === 'es' ? 'Aguja Madera WDT' : 'Wood WDT Needle' }}</small>
               </div>
               <div class="gear-item gear-active">
                 <div class="gear-img-box">
-                  <img src="images/barista/aguja_latte.png" alt="Aguja de latte art profesional" />
+                  <img src="images/barista/aguja_latte.png" alt="Aguja de latte art profesional" loading="lazy" decoding="async" />
                 </div>
                 <small>{{ language === 'es' ? 'Aguja Latte Art' : 'Latte Art Needle' }}</small>
               </div>
@@ -1059,7 +1059,7 @@
               <button type="button" class="util-card" (click)="openUtilProduct(product)"
                 [attr.aria-label]="(language === 'es' ? 'Ver de cerca: ' : 'View details: ') + product.name[language]">
                 <span class="util-img">
-                  <img [src]="product.image" [alt]="product.name[language]" loading="lazy" />
+                  <img [src]="product.image" [alt]="product.name[language]" loading="lazy" decoding="async" />
                   <span class="util-expand-icon"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i></span>
                 </span>
                 <strong>{{ product.name[language] }}</strong>
@@ -1136,12 +1136,12 @@
 
         <div class="catering-right">
           <div class="car-card">
-            <div class="car-img"><img src="images/kfestcar_bar.png" alt="Barra Móvil Kfestcar" /></div>
+            <div class="car-img"><img src="images/kfestcar_bar.png" alt="Barra Móvil Kfestcar" loading="lazy" decoding="async" /></div>
             <strong>{{ language === 'es' ? 'Barra Móvil Kfestcar' : 'Kfestcar Mobile Bar' }}</strong>
             <small>{{ language === 'es' ? 'ESTACIÓN ESPRESSO ITALIANA' : 'ITALIAN ESPRESSO STATION' }}</small>
           </div>
           <div class="car-card">
-            <div class="car-img"><img src="images/kfestcar_activation.png" alt="Cultura y Activación" /></div>
+            <div class="car-img"><img src="images/kfestcar_activation.png" alt="Cultura y Activación" loading="lazy" decoding="async" /></div>
             <strong>{{ language === 'es' ? 'Cultura & Activación' : 'Culture & Activation' }}</strong>
             <small>{{ language === 'es' ? 'CATAS Y MÉTODOS EN VIVO' : 'LIVE TASTINGS & BREWING' }}</small>
           </div>
@@ -1251,7 +1251,7 @@
 
         <aside class="official-card">
           <p class="card-lbl">{{ language === 'es' ? 'HORARIO DE ATENCIÓN' : 'BUSINESS HOURS' }}</p>
-          <strong class="phone-main" style="font-size: 1.25rem; color: var(--gold);">8:00 AM – 5:00 PM</strong>
+          <strong class="phone-main" style="font-size: 1.25rem; color: var(--gold);">7:30 AM – 8:00 PM</strong>
           <small
             style="display:block; color: var(--text2); margin-top: 4px; font-size: 0.8rem; letter-spacing: 0.5px;">{{
             language === 'es' ? 'Lunes a Sábado · Atención y pedidos inmediatos' : 'Monday to Saturday · Immediate
@@ -1263,7 +1263,7 @@
           <strong class="phone-sec">987 483 134</strong>
           <hr class="card-hr" />
           <p class="card-lbl">{{ language === 'es' ? 'DESPACHOS & CORREO' : 'SHIPPING & EMAIL' }}</p>
-          <strong class="email">pedidos@kfest.pe</strong>
+          <strong class="email">fundostateresitaperu@gmail.com</strong>
           <hr class="card-hr" />
           <blockquote class="verse">
             {{ language === 'es'
@@ -1288,7 +1288,7 @@
       <div class="footer-brand">
         <div class="footer-logo-row">
           <img [src]="isLightMode ? 'images/logo_marron.png' : 'images/Logo_Oficial.png'"
-            alt="Kfest - Café del Fundo Santa Teresita" class="footer-logo" />
+            alt="Kfest - Café del Fundo Santa Teresita" class="footer-logo" loading="lazy" decoding="async" />
         </div>
         <p class="footer-desc">
           {{ language === 'es'
@@ -1329,9 +1329,8 @@
         <h4>{{ language === 'es' ? 'CONTACTO & DESPACHOS' : 'CONTACT & DISPATCH' }}</h4>
         <span><i class="fa-solid fa-phone" aria-hidden="true"></i> 918 422 677 / 987 483 134</span>
         <span><i class="fa-solid fa-envelope" aria-hidden="true"></i> fundostateresitaperu@gmail.com </span>
-        <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ language === 'es' ? 'Jr. pancho fierro
-          3547,
-          los olivos, Lima, Perú' : 'Jr. pancho fierro 3547, Lima Region, Peru' }}</span>
+        <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ language === 'es' ? 'Jr. Pancho Fierro
+          3547, Los Olivos, Lima, Perú' : 'Jr. Pancho Fierro 3547, Los Olivos, Lima, Peru' }}</span>
         <span><i class="fa-solid fa-clock" aria-hidden="true"></i> {{ language === 'es' ? 'Lun - Sáb: 7:30 am - 8:00 pm'
           :
           'Mon - Sat: 7:30 am - 8:00 pm' }}</span>

@@ -19,6 +19,37 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
+  it('restores persisted browser preferences after the initial render, keeping hydration state consistent', async () => {
+    localStorage.setItem('kfest_theme', 'light');
+    localStorage.setItem('kfest_favorites', '["espresso"]');
+    try {
+      const fixture = TestBed.createComponent(App);
+      expect(fixture.componentInstance.isLightMode).toBe(false);
+      expect(fixture.componentInstance.favoritesCount).toBe(0);
+      fixture.detectChanges();
+      await fixture.whenStable();
+      expect(fixture.componentInstance.isLightMode).toBe(true);
+      expect(fixture.componentInstance.favoriteCoffeeIds).toEqual(['espresso']);
+      expect(fixture.nativeElement.querySelector('.brand-logo-img').getAttribute('src')).toBe('images/logo_marron.png');
+    } finally {
+      localStorage.removeItem('kfest_theme');
+      localStorage.removeItem('kfest_favorites');
+      document.body.classList.remove('light-theme');
+    }
+  });
+
+  it('updates the document language without creating alternate language routes', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const buttons = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.lang-pill button');
+    buttons[1].click();
+    fixture.detectChanges();
+    expect(document.documentElement.lang).toBe('en');
+    buttons[0].click();
+    fixture.detectChanges();
+    expect(document.documentElement.lang).toBe('es');
+  });
+
   it('should render the KFEST brand in the page', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();

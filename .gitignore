@@ -47,3 +47,9 @@ BARISTA_LAB.md
 
 # Temporary raw downloads
 public/images/drive/
+
+# Local build configuration and credentials
+.env
+.env.*
+!.env.example
+.wrangler/
