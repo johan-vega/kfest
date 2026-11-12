@@ -1,0 +1,417 @@
+{
+  "action": "deleted",
+  "totalImages": 153,
+  "unusedCount": 97,
+  "unusedBytes": 49254179,
+  "dynamicPrefixes": [
+    "images/carta/"
+  ],
+  "missing": [],
+  "unused": [
+    {
+      "path": "public/favicon.ico",
+      "bytes": 15086
+    },
+    {
+      "path": "public/images/1kfest.png",
+      "bytes": 1322728
+    },
+    {
+      "path": "public/images/2kfest.png",
+      "bytes": 1414156
+    },
+    {
+      "path": "public/images/4kfest.png",
+      "bytes": 1677913
+    },
+    {
+      "path": "public/images/abuela_stand.png",
+      "bytes": 991890
+    },
+    {
+      "path": "public/images/bag_1kg.png",
+      "bytes": 381162
+    },
+    {
+      "path": "public/images/bag_250g.png",
+      "bytes": 302050
+    },
+    {
+      "path": "public/images/bag_500g.png",
+      "bytes": 370938
+    },
+    {
+      "path": "public/images/barista/aeropress.png",
+      "bytes": 345479
+    },
+    {
+      "path": "public/images/barista/balanza_digital.png",
+      "bytes": 85134
+    },
+    {
+      "path": "public/images/barista/bandeja_cata.png",
+      "bytes": 643713
+    },
+    {
+      "path": "public/images/barista/dripper_artesanal_mupeco.png",
+      "bytes": 209298
+    },
+    {
+      "path": "public/images/barista/prensa_francesa.png",
+      "bytes": 808287
+    },
+    {
+      "path": "public/images/barista/v60.png",
+      "bytes": 968131
+    },
+    {
+      "path": "public/images/compañeros.jpg",
+      "bytes": 476315
+    },
+    {
+      "path": "public/images/equi.jpg",
+      "bytes": 200549
+    },
+    {
+      "path": "public/images/equipo.jpg",
+      "bytes": 184685
+    },
+    {
+      "path": "public/images/fundo_1.png",
+      "bytes": 544740
+    },
+    {
+      "path": "public/images/fundo_2.png",
+      "bytes": 431054
+    },
+    {
+      "path": "public/images/fundo_3.png",
+      "bytes": 477036
+    },
+    {
+      "path": "public/images/hero_bg.png",
+      "bytes": 1052354
+    },
+    {
+      "path": "public/images/hero_bg_barista_old.png",
+      "bytes": 774126
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2019_11_nosotros.png",
+      "bytes": 610924
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2020_10_fourproducto.png",
+      "bytes": 381162
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2020_10_singleproducto.png",
+      "bytes": 302050
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2020_10_twoproducto.png",
+      "bytes": 370938
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfestcar_1.png",
+      "bytes": 857142
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfestcar_2_v3.png",
+      "bytes": 767322
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_fundo_santa_teresita (1).png",
+      "bytes": 431054
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_fundo_santa_teresita (2).png",
+      "bytes": 477036
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_fundo_santa_teresita.png",
+      "bytes": 544740
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_utilkfest1.png",
+      "bytes": 397480
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_utilkfest2.png",
+      "bytes": 417345
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_utilkfest3.png",
+      "bytes": 223817
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_kfest_utilkfest4.png",
+      "bytes": 257754
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_perfiles_kfest_grano.png",
+      "bytes": 274087
+    },
+    {
+      "path": "public/images/image_from_https_kfest.pe_wp_content_uploads_2022_11_perfiles_kfest_molido.png",
+      "bytes": 302280
+    },
+    {
+      "path": "public/images/jefa.jpg",
+      "bytes": 222487
+    },
+    {
+      "path": "public/images/jefa2.jpg",
+      "bytes": 405621
+    },
+    {
+      "path": "public/images/jefa3.jpg",
+      "bytes": 322087
+    },
+    {
+      "path": "public/images/jefa4.jpg",
+      "bytes": 231667
+    },
+    {
+      "path": "public/images/legacy/abuelos_teresa_silvino.jpg",
+      "bytes": 173281
+    },
+    {
+      "path": "public/images/legacy/bus_camino_chacra.jpg",
+      "bytes": 70936
+    },
+    {
+      "path": "public/images/legacy/cabanita_chacra.jpg",
+      "bytes": 287783
+    },
+    {
+      "path": "public/images/legacy/caminata_1km.jpg",
+      "bytes": 187853
+    },
+    {
+      "path": "public/images/legacy/cuartito_vivienda.jpg",
+      "bytes": 99116
+    },
+    {
+      "path": "public/images/legacy/descenso_montana.jpg",
+      "bytes": 258821
+    },
+    {
+      "path": "public/images/legacy/estacion_autobus.jpg",
+      "bytes": 152807
+    },
+    {
+      "path": "public/images/legacy/subiendo_fundo.jpg",
+      "bytes": 125527
+    },
+    {
+      "path": "public/images/logo.png",
+      "bytes": 8575
+    },
+    {
+      "path": "public/images/logo_brown.png",
+      "bytes": 411028
+    },
+    {
+      "path": "public/images/New-Hero-original.jpg",
+      "bytes": 223198
+    },
+    {
+      "path": "public/images/nosotros_main.png",
+      "bytes": 2140966
+    },
+    {
+      "path": "public/images/process/01_bayas_madurando.jpg",
+      "bytes": 97070
+    },
+    {
+      "path": "public/images/process/02_cosecha_selectiva.jpg",
+      "bytes": 207512
+    },
+    {
+      "path": "public/images/process/03_cosecha_manos.jpg",
+      "bytes": 315236
+    },
+    {
+      "path": "public/images/process/04_seleccion_cerezas.jpg",
+      "bytes": 101215
+    },
+    {
+      "path": "public/images/process/04_seleccion_mesa.jpg",
+      "bytes": 101215
+    },
+    {
+      "path": "public/images/process/05_seleccion_2.jpg",
+      "bytes": 174963
+    },
+    {
+      "path": "public/images/process/05_seleccion_mesa.jpg",
+      "bytes": 174963
+    },
+    {
+      "path": "public/images/process/06_despulpado.jpg",
+      "bytes": 62241
+    },
+    {
+      "path": "public/images/process/07b_lavado.jpg",
+      "bytes": 241635
+    },
+    {
+      "path": "public/images/process/07_lavado_manantial.jpg",
+      "bytes": 171658
+    },
+    {
+      "path": "public/images/process/08_secado_sol.jpg",
+      "bytes": 252126
+    },
+    {
+      "path": "public/images/process/09_subiendo_montana.jpg",
+      "bytes": 125527
+    },
+    {
+      "path": "public/images/process/10_caminata_altura.jpg",
+      "bytes": 187853
+    },
+    {
+      "path": "public/images/process/11_pilado_grano.jpg",
+      "bytes": 152165
+    },
+    {
+      "path": "public/images/process/12_cafe_verde_oro.jpg",
+      "bytes": 72040
+    },
+    {
+      "path": "public/images/process/13_tostado_especialidad.jpg",
+      "bytes": 95352
+    },
+    {
+      "path": "public/images/process/14_seleccion_tostado.jpg",
+      "bytes": 66075
+    },
+    {
+      "path": "public/images/process/14_seleccion_tueste.jpg",
+      "bytes": 66075
+    },
+    {
+      "path": "public/images/process/15_molienda_calibrada.jpg",
+      "bytes": 86883
+    },
+    {
+      "path": "public/images/process/16_envasado_valvula.jpg",
+      "bytes": 68517
+    },
+    {
+      "path": "public/images/process/17_taza_servida.jpg",
+      "bytes": 106528
+    },
+    {
+      "path": "public/images/produc.jpg",
+      "bytes": 434095
+    },
+    {
+      "path": "public/images/productos.jpg",
+      "bytes": 122193
+    },
+    {
+      "path": "public/images/products/bolsa_1kg.png",
+      "bytes": 761607
+    },
+    {
+      "path": "public/images/products/drip_coffee.png",
+      "bytes": 3186457
+    },
+    {
+      "path": "public/images/products/fourproducto.png",
+      "bytes": 381162
+    },
+    {
+      "path": "public/images/products/prod_21.png",
+      "bytes": 1602701
+    },
+    {
+      "path": "public/images/products/prod_22.png",
+      "bytes": 1355843
+    },
+    {
+      "path": "public/images/products/prod_23.png",
+      "bytes": 1181012
+    },
+    {
+      "path": "public/images/products/prod_24.png",
+      "bytes": 1032001
+    },
+    {
+      "path": "public/images/team/cosechadores_campo.jpg",
+      "bytes": 476315
+    },
+    {
+      "path": "public/images/team/equipo_fundo.jpg",
+      "bytes": 184685
+    },
+    {
+      "path": "public/images/team/fundadores.jpg",
+      "bytes": 173281
+    },
+    {
+      "path": "public/images/team/teresa_chavez.jpg",
+      "bytes": 222487
+    },
+    {
+      "path": "public/images/woman_machete.png",
+      "bytes": 1214705
+    },
+    {
+      "path": "public/images/products/40gr_blend.png",
+      "bytes": 1186726
+    },
+    {
+      "path": "public/images/products/4_paquetes_virtudes.png",
+      "bytes": 1312994
+    },
+    {
+      "path": "public/images/products/5_drip_coffee.png",
+      "bytes": 968131
+    },
+    {
+      "path": "public/images/products/60gr_blend.png",
+      "bytes": 1386691
+    },
+    {
+      "path": "public/images/products/bandeja_cata.png",
+      "bytes": 643713
+    },
+    {
+      "path": "public/images/products/bidon.png",
+      "bytes": 1484206
+    },
+    {
+      "path": "public/images/products/blend_bolsa.png",
+      "bytes": 729629
+    },
+    {
+      "path": "public/images/products/singleproducto.png",
+      "bytes": 302050
+    },
+    {
+      "path": "public/images/products/twoproducto.png",
+      "bytes": 370938
+    }
+  ],
+  "followUpCleanups": [
+    {
+      "reason": "Útilkfest now contains three products, including the coffee soap.",
+      "deletedCount": 2,
+      "deletedBytes": 675099,
+      "deleted": [
+        {
+          "path": "public/images/util_doser.png",
+          "bytes": 417345
+        },
+        {
+          "path": "public/images/util_seeds.png",
+          "bytes": 257754
+        }
+      ]
+    }
+  ]
+}

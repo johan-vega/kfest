@@ -1,23 +1,25 @@
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, Inject, OnDestroy, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, AfterViewInit, Component, ElementRef, HostListener, Inject, OnDestroy, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { CoffeeMenuItem, COFFEE_MENU } from './coffee-menu.data';
+import { ImageViewer } from './image-viewer';
 import {
-  CoffeeCategoryKey,
-  CoffeeMenuItem,
-  QuizOption,
-  QUIZ_CATEGORIES,
-  QUIZ_FLAVOR_FILTERS,
-  COFFEE_MENU,
-  QUIZ_MILK_OPTIONS,
-  QUIZ_GRIND_OPTIONS,
-  QUIZ_SPECIAL_OPTIONS,
-  QUIZ_FOOD_OPTIONS
-} from './coffee-menu.data';
+  BREW_CONFIGS, BrewConfig, BrewMethod, BrewResult, CUP_VOLUMES,
+  calculateBrew, normalizePortions, normalizeCupVolume, normalizeConcentrateDose, normalizeConcentrateRatio, isBrewMethod,
+  brewSteps, brewTime, brewWarnings, buildBrewWhatsAppLink, formatBrewNumber
+} from './brew-calculator';
+export { BREW_CONFIGS } from './brew-calculator';
+export type { BrewConfig, BrewMethod } from './brew-calculator';
 
 export type Language = 'es' | 'en';
+export interface UtilProduct {
+  id: string;
+  image: string;
+  name: Record<Language, string>;
+  tagline: Record<Language, string>;
+}
 export type GrindType = 'grano' | 'v60' | 'prensa' | 'gota' | 'accesorios';
 export type CataFormat = 'grano' | 'molido';
 export type EventType = 'bodas' | 'corporativos' | 'ferias' | 'aniversarios' | 'lanzamientos' | 'privados';
-export type BrewMethod = 'v60' | 'prensa' | 'moka' | 'espresso' | 'chemex' | 'gota';
 export type TraceabilityTab = 'origen' | 'proceso' | 'cata' | 'social';
 
 export type WhatsAppAction =
@@ -37,98 +39,6 @@ export type WhatsAppAction =
   | 'utilkfest'
   | 'catering'
   | 'concierge';
-
-export interface BrewConfig {
-  name: { es: string; en: string };
-  ratio: number;
-  waterPerCup: number;
-  grind: { es: string; en: string };
-  temp: number;
-  time: string;
-  tip: { es: string; en: string };
-  icon: string;
-}
-
-export const BREW_CONFIGS: Record<BrewMethod, BrewConfig> = {
-  v60: {
-    name: { es: 'V60 / Filtrado Cónico', en: 'V60 / Pour Over' },
-    ratio: 15,
-    waterPerCup: 180,
-    grind: { es: 'Media-Fina (textura de sal de mesa)', en: 'Medium-Fine' },
-    temp: 92,
-    time: '2:45 – 3:15 min',
-    tip: {
-      es: 'Realiza un pre-infusionado ("bloom") de 35s con el doble de agua para despertar las notas a panela y miel del Fundo Santa Teresita.',
-      en: 'Perform a 35s bloom with double the water to awaken the honey and golden panela notes.'
-    },
-    icon: 'fa-solid fa-filter'
-  },
-  prensa: {
-    name: { es: 'Prensa Francesa', en: 'French Press' },
-    ratio: 12,
-    waterPerCup: 200,
-    grind: { es: 'Gruesa (textura de sal marina)', en: 'Coarse' },
-    temp: 94,
-    time: '4:00 min',
-    tip: {
-      es: 'Vierte toda el agua, reposa 4 min. Rompe la costra superficial con cuchara, retira la espuma y baja el émbolo lentamente sin presionar el fondo.',
-      en: 'Pour all water, rest 4 min. Break the crust, skim foam, and press plunger gently without crushing bottom grounds.'
-    },
-    icon: 'fa-solid fa-mug-hot'
-  },
-  moka: {
-    name: { es: 'Cafetera Moka Italiana', en: 'Moka Pot' },
-    ratio: 10,
-    waterPerCup: 60,
-    grind: { es: 'Fina calibrada (arenilla fina)', en: 'Fine' },
-    temp: 90,
-    time: '2:30 min',
-    tip: {
-      es: 'Llena la base con agua ya caliente hasta la válvula y retira del fuego apenas comience el gorgoteo para evitar notas amargas.',
-      en: 'Fill lower chamber with pre-heated water up to the safety valve; remove immediately upon gurgling.'
-    },
-    icon: 'fa-solid fa-fire-burner'
-  },
-  espresso: {
-    name: { es: 'Espresso Máquina', en: 'Espresso Machine' },
-    ratio: 2,
-    waterPerCup: 36,
-    grind: { es: 'Extra Fina (polvo suave)', en: 'Extra Fine' },
-    temp: 93,
-    time: '25 – 30 seg',
-    tip: {
-      es: 'Tampado nivelado a 9 bares de presión. La crema avellana dorada encapsulará los aceites aromáticos de cacao puro.',
-      en: 'Level 9-bar tamping pressure yields a golden hazelnut crema encapsulating pure cacao aromatics.'
-    },
-    icon: 'fa-solid fa-bolt'
-  },
-  chemex: {
-    name: { es: 'Chemex Artesanal', en: 'Chemex' },
-    ratio: 16,
-    waterPerCup: 220,
-    grind: { es: 'Media (arena de río)', en: 'Medium' },
-    temp: 93,
-    time: '4:00 – 4:30 min',
-    tip: {
-      es: 'Enjuaga el filtro de papel grueso con abundante agua caliente antes de verter el café para máxima limpieza y brillo en taza.',
-      en: 'Rinse thick paper filter thoroughly with hot water first for crystal clarity and bright cup acidity.'
-    },
-    icon: 'fa-solid fa-flask'
-  },
-  gota: {
-    name: { es: 'Gota a Gota Tradicional', en: 'Rainforest Slow Drip' },
-    ratio: 8,
-    waterPerCup: 100,
-    grind: { es: 'Media-Gruesa', en: 'Medium-Coarse' },
-    temp: 91,
-    time: '5:00 min',
-    tip: {
-      es: 'Método patrimonial de la Selva Central. Extrae una esencia de café densa y concentrada, ideal para combinar con leche fresca.',
-      en: 'Heritage Amazonian extraction. Yields a dense coffee essence ideal for combining with fresh milk.'
-    },
-    icon: 'fa-solid fa-droplet'
-  }
-};
 
 export interface FaqItem {
   q: { es: string; en: string };
@@ -294,6 +204,7 @@ const EVENT_NAMES: Record<Language, Record<EventType, string>> = {
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [ImageViewer],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   encapsulation: ViewEncapsulation.None
@@ -322,6 +233,12 @@ export class App implements AfterViewInit, OnDestroy {
   readonly totalCatalogPages: number = 7;
   readonly catalogPageList: number[] = [1, 2, 3, 4, 5, 6, 7];
   isCatalogFsOpen: boolean = false;
+  selectedUtilProduct: UtilProduct | null = null;
+  readonly utilProducts: readonly UtilProduct[] = [
+    { id: 'coaster', image: 'images/util_coaster.png', name: { es: 'Posavasos Barista', en: 'Barista Coaster' }, tagline: { es: '100% BIO-COMPUESTO', en: '100% BIO-COMPOSITE' } },
+    { id: 'soap', image: 'images/jabon_cafe.png', name: { es: 'Jabón de borra de café', en: 'Coffee Grounds Soap' }, tagline: { es: 'TEXTURA AROMÁTICA', en: 'AROMATIC TEXTURE' } },
+    { id: 'cup', image: 'images/util_cup.png', name: { es: 'Vaso Medidor Barista', en: 'Barista Measuring Cup' }, tagline: { es: 'TERMO-RESISTENTE', en: 'THERMAL-RESISTANT' } }
+  ];
 
   readonly catalogPageTitles: Record<number, { es: string; en: string }> = {
     1: { es: 'Portada Oficial Kfest', en: 'Official Kfest Cover' },
@@ -351,23 +268,42 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   openCatalogFs(): void {
+    this.selectedUtilProduct = null;
     this.isCatalogFsOpen = true;
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden';
-    }
   }
 
-  closeCatalogFs(): void {
+  closeCatalogFs(): void { this.isCatalogFsOpen = false; }
+
+  openUtilProduct(product: UtilProduct): void {
     this.isCatalogFsOpen = false;
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
-    }
+    this.selectedUtilProduct = product;
+  }
+
+  closeImageViewer(): void {
+    this.isCatalogFsOpen = false;
+    this.selectedUtilProduct = null;
+  }
+
+  get viewerImage(): string {
+    return this.isCatalogFsOpen ? 'images/carta/' + this.currentCatalogPage + '.png' : this.selectedUtilProduct?.image ?? '';
+  }
+
+  get viewerTitle(): string {
+    if (this.selectedUtilProduct) return this.selectedUtilProduct.name[this.language];
+    return (this.language === 'es' ? 'Página ' : 'Page ') + this.currentCatalogPage + ' · ' + this.catalogPageTitles[this.currentCatalogPage][this.language];
   }
 
   private catalogTouchStartX: number = 0;
   private catalogTouchStartY: number = 0;
+  private catalogDidSwipe = false;
+
+  onCatalogPageClick(): void {
+    if (this.catalogDidSwipe) { this.catalogDidSwipe = false; return; }
+    this.openCatalogFs();
+  }
 
   onCatalogTouchStart(event: TouchEvent): void {
+    this.catalogDidSwipe = false;
     if (event.touches.length === 1) {
       this.catalogTouchStartX = event.touches[0].clientX;
       this.catalogTouchStartY = event.touches[0].clientY;
@@ -379,6 +315,7 @@ export class App implements AfterViewInit, OnDestroy {
       const deltaX = event.changedTouches[0].clientX - this.catalogTouchStartX;
       const deltaY = event.changedTouches[0].clientY - this.catalogTouchStartY;
       if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        this.catalogDidSwipe = true;
         if (deltaX < 0) {
           this.nextCatalogPage();
         } else {
@@ -454,6 +391,15 @@ export class App implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private readonly platformId: object
   ) {
+    afterNextRender(() => {
+      // TikTok's official creator embed script runs only after the browser view exists.
+      // Keep the blockquote fallback link usable if the provider is unavailable.
+      if (document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) return;
+      const script = document.createElement('script');
+      script.src = 'https://www.tiktok.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    });
     if (typeof window !== 'undefined') {
       try {
         const saved = localStorage.getItem('kfest_theme');
@@ -501,8 +447,8 @@ export class App implements AfterViewInit, OnDestroy {
     { id: 'catering', nav: 'catering' },
     { id: 'calculadora', nav: 'calculadora' },
     { id: 'cata', nav: 'cata' },
-    { id: 'quiz', nav: 'quiz' },
     { id: 'carta', nav: 'carta' },
+    { id: 'tiktok', nav: 'herencia' },
     { id: 'proceso', nav: 'herencia' },
     { id: 'instagram', nav: 'herencia' },
     { id: 'herencia', nav: 'herencia' },
@@ -511,15 +457,10 @@ export class App implements AfterViewInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (this.isCatalogFsOpen) {
-      if (event.key === 'Escape') this.closeCatalogFs();
-      if (event.key === 'ArrowLeft') this.prevCatalogPage();
-      if (event.key === 'ArrowRight') this.nextCatalogPage();
-    } else {
-      // Also allow keyboard navigation when hovering or near catalog
-      if (event.key === 'ArrowLeft' && this.activeSection === 'carta') this.prevCatalogPage();
-      if (event.key === 'ArrowRight' && this.activeSection === 'carta') this.nextCatalogPage();
-    }
+    if (this.isCatalogFsOpen || this.selectedUtilProduct) return;
+    if ((event.target as HTMLElement | null)?.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (event.key === 'ArrowLeft' && this.activeSection === 'carta') this.prevCatalogPage();
+    if (event.key === 'ArrowRight' && this.activeSection === 'carta') this.nextCatalogPage();
   }
 
   @HostListener('window:scroll', [])
@@ -597,23 +538,15 @@ export class App implements AfterViewInit, OnDestroy {
 
   // Feature A: Barista Calculator State
   selectedBrewMethod: BrewMethod = 'v60';
-  brewCups: number = 2;
+  brewCups: number = 1;
+  brewCupVolume: number = 200;
+  brewMokaCapacity: number = 3;
+  brewConcentrateDose: number = BREW_CONFIGS.gota.doseGrams;
+  brewConcentrateRatio: number = BREW_CONFIGS.gota.waterRatio;
+  readonly brewCupVolumes = CUP_VOLUMES;
+  readonly brewMokaCapacities = BREW_CONFIGS.moka.capacities;
   brewMethodsList: BrewMethod[] = ['v60', 'prensa', 'moka', 'espresso', 'chemex', 'gota'];
 
-  // Feature B: Coffee Quiz State (Encuentra tu Café Ideal - Carta Kfest)
-  quizStep: number = 1;
-  quizCategory: CoffeeCategoryKey = 'calientes';
-  quizFlavor: string = 'todos';
-  selectedCoffeeId: string = 'capuchino';
-  quizPrepOption: string = 'leche_entera';
-  quizFoodOption: string = 'none';
-
-  // Legacy compatibility fields
-  quizMethod: string = '';
-  quizAmount: string = '';
-
-  readonly quizCategories = QUIZ_CATEGORIES;
-  readonly quizFlavorFilters = QUIZ_FLAVOR_FILTERS;
   readonly coffeeMenu = COFFEE_MENU;
 
   // Feature C: Traceability Passport State
@@ -667,220 +600,6 @@ export class App implements AfterViewInit, OnDestroy {
     this.selectedGrind = grind;
   }
 
-  get collectionProducts() {
-    const isEs = this.language === 'es';
-    switch (this.selectedGrind) {
-      case 'v60':
-        return [
-          {
-            weight: isEs ? '250 GRAMOS' : '250 GRAMS',
-            tag: isEs ? 'MOLIENDA MEDIA-FINA V60' : 'MEDIUM-FINE V60 GRIND',
-            name: isEs ? '1 Paquete CAFÉ DE ESPECIALIDAD (V60)' : '1 Bag SPECIALTY COFFEE (V60)',
-            desc: isEs
-              ? 'Calibrado con molienda media-fina para extracción cónica en V60. Resalta aromas a panela de oro y acidez cítrica brillante.'
-              : 'Calibrated medium-fine for V60 cone extraction. Highlights sweet panela and bright citrus acidity.',
-            price: 'S/ 30.00',
-            img: 'images/products/singleproducto.png',
-            action: 'prod_250g' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? '500 GRAMOS TOTAL' : '500 GRAMS TOTAL',
-            tag: isEs ? 'DÚO CALIBRADO FILTRADOS' : 'POUR OVER CALIBRATED DUO',
-            name: isEs ? '2 Paquetes CAFÉ DE ESPECIALIDAD (V60)' : '2 Bags SPECIALTY COFFEE (V60)',
-            desc: isEs
-              ? 'Dos empaques de 250g sellados con nitrógeno y válvula. Abres uno y el otro queda hermético para máxima frescura en cada vertido.'
-              : 'Two 250g hermetic bags with degas valves. Freshness locked in for every single pour over.',
-            price: 'S/ 56.00',
-            img: 'images/products/twoproducto.png',
-            action: 'prod_500g' as WhatsAppAction,
-            isFeatured: true
-          },
-          {
-            weight: isEs ? '1 KILOGRAMO TOTAL' : '1 KILOGRAM TOTAL',
-            tag: isEs ? 'COFRE FILTRADOS · AHORRA S/ 20' : 'DRIP PACK · SAVE S/ 20',
-            name: isEs ? '4 Paquetes CAFÉ DE ESPECIALIDAD (V60)' : '4 Bags SPECIALTY COFFEE (V60)',
-            desc: isEs
-              ? 'Cuatro bolsas de 250g con molienda calibrada para cafetera V60 o Chemex. El suministro mensual perfecto al mejor precio.'
-              : 'Four 250g bags custom ground for V60 or Chemex. Your ultimate monthly brew supply at the best value.',
-            price: 'S/ 100.00',
-            img: 'images/products/4_paquetes_virtudes.png',
-            action: 'prod_1kg' as WhatsAppAction,
-            isFeatured: false
-          }
-        ];
-      case 'prensa':
-        return [
-          {
-            weight: isEs ? '250 GRAMOS' : '250 GRAMS',
-            tag: isEs ? 'MOLIENDA GRUESA INMERSIÓN' : 'COARSE IMMERSION GRIND',
-            name: isEs ? '1 Paquete CAFÉ DE ESPECIALIDAD (Prensa)' : '1 Bag SPECIALTY COFFEE (Press)',
-            desc: isEs
-              ? 'Molienda gruesa tipo sal marina, diseñada para no tapar el filtro metálico y lograr una taza sedosa y achocolatada.'
-              : 'Coarse sea-salt grind designed for metal mesh filtration, delivering a velvety, chocolate cup.',
-            price: 'S/ 30.00',
-            img: 'images/products/blend_bolsa.png',
-            action: 'prod_250g' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? '500 GRAMOS TOTAL' : '500 GRAMS TOTAL',
-            tag: isEs ? 'DÚO PRENSA FRANCESA' : 'FRENCH PRESS DUO',
-            name: isEs ? '2 Paquetes CAFÉ DE ESPECIALIDAD (Prensa)' : '2 Bags SPECIALTY COFFEE (Press)',
-            desc: isEs
-              ? 'Dúo de 250g con molienda gruesa para prensa francesa o cold brew. Extracción con cuerpo redondo y notas a cacao al 70%.'
-              : 'Two 250g packs coarse-ground for French press or cold brew. Full-bodied extraction with 70% dark cacao notes.',
-            price: 'S/ 56.00',
-            img: 'images/products/twoproducto.png',
-            action: 'prod_500g' as WhatsAppAction,
-            isFeatured: true
-          },
-          {
-            weight: isEs ? '1 KILOGRAMO TOTAL' : '1 KILOGRAM TOTAL',
-            tag: isEs ? 'COFRE PRENSA · AHORRA S/ 20' : 'PRESS PACK · SAVE S/ 20',
-            name: isEs ? '4 Paquetes CAFÉ DE ESPECIALIDAD (Prensa)' : '4 Bags SPECIALTY COFFEE (Press)',
-            desc: isEs
-              ? 'Pack familiar de 1kg en 4 bolsas independientes con molienda gruesa. Rendimiento supremo para desayunos en familia.'
-              : 'Family 1kg pack across 4 independent coarse-ground bags. Perfect for family gatherings.',
-            price: 'S/ 100.00',
-            img: 'images/products/4_paquetes_virtudes.png',
-            action: 'prod_1kg' as WhatsAppAction,
-            isFeatured: false
-          }
-        ];
-      case 'gota':
-        return [
-          {
-            weight: isEs ? 'CAJA 5 DRIP' : '5-PACK DRIP',
-            tag: isEs ? 'DRIP COFFEE INDIVIDUAL' : 'SINGLE-SERVE DRIP BAGS',
-            name: isEs ? 'Caja 5 Drip Coffee INDIVIDUALES' : '5 Single-Serve DRIP COFFEE BOX',
-            desc: isEs
-              ? 'Filtros individuales de café gota a gota listos para infusionar directamente en tu taza con solo agregar agua caliente. Máxima practicidad.'
-              : 'Portable single-serve pour-over filters ready to brew directly into your mug with hot water.',
-            price: 'S/ 25.00',
-            img: 'images/products/5_drip_coffee.png',
-            action: 'prod_250g' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? '500 GRAMOS TOTAL' : '500 GRAMS TOTAL',
-            tag: isEs ? 'DÚO GOTA A GOTA SELVA' : 'RAINFOREST DRIP DUO',
-            name: isEs ? '2 Paquetes CAFÉ DE ESPECIALIDAD (Drip)' : '2 Bags SPECIALTY COFFEE (Drip)',
-            desc: isEs
-              ? 'Molienda media-gruesa para la tradicional cafetera gota a gota de Selva Central. Produce una esencia densa, dulce y aromática.'
-              : 'Calibrated grind for traditional slow drip percolators. Yields a dense, sweet, and aromatic coffee essence.',
-            price: 'S/ 56.00',
-            img: 'images/products/60gr_blend.png',
-            action: 'prod_500g' as WhatsAppAction,
-            isFeatured: true
-          },
-          {
-            weight: isEs ? '1 KILOGRAMO TOTAL' : '1 KILOGRAM TOTAL',
-            tag: isEs ? 'COFRE GOTA A GOTA · AHORRA S/ 20' : 'DRIP CHEST · SAVE S/ 20',
-            name: isEs ? '4 Paquetes CAFÉ DE ESPECIALIDAD (Drip)' : '4 Bags SPECIALTY COFFEE (Drip)',
-            desc: isEs
-              ? 'Cofre degustación de 1kg con molienda artesanal para gota a gota tradicional. Rendimiento incomparable para amantes de la esencia pura.'
-              : '1kg tasting chest with artisan grind for slow drip. Unmatched yield for pure essence lovers.',
-            price: 'S/ 100.00',
-            img: 'images/products/4_paquetes_virtudes.png',
-            action: 'prod_1kg' as WhatsAppAction,
-            isFeatured: false
-          }
-        ];
-      case 'accesorios':
-        return [
-          {
-            weight: isEs ? '40 GRAMOS' : '40 GRAMS',
-            tag: isEs ? 'DEGUSTACIÓN SINGLE' : 'SINGLE TASTING POUCH',
-            name: isEs ? 'Sachet Blend Degustación 40g' : '40g Blend Tasting Sachet',
-            desc: isEs
-              ? 'Dosis calibrada de microlote de altura (81-84 Pts SCA). La medida exacta para probar la esencia pura de nuestro tueste artesanal.'
-              : 'Calibrated single dose of specialty microlot (81-84 SCA). The exact measure to sample our fresh artisan roast.',
-            price: 'S/ 10.00',
-            img: 'images/products/40gr_blend.png',
-            action: 'prod_40g' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? 'BIDÓN TÉRMICO' : 'THERMAL CANISTER',
-            tag: isEs ? 'CONSERVACIÓN & TRANSPORTE' : 'STORAGE & TRANSPORT',
-            name: isEs ? 'Bidón Kfest de Conservación Hermética' : 'Kfest Airtight Coffee Canister',
-            desc: isEs
-              ? 'Recipiente hermético diseñado para proteger los granos de café de la luz, humedad y oxígeno, manteniendo el aroma del Fundo intacto.'
-              : 'Airtight container crafted to shield beans from light, moisture, and oxidation, preserving farm aroma.',
-            price: 'S/ 45.00',
-            img: 'images/products/bidon.png',
-            action: 'prod_bidon' as WhatsAppAction,
-            isFeatured: true
-          },
-          {
-            weight: isEs ? 'BANDEJA SCA' : 'SCA CUPPING TRAY',
-            tag: isEs ? 'EQUIPO PROFESIONAL' : 'PROFESSIONAL GEAR',
-            name: isEs ? 'Bandeja Oficial de Cata Kfest' : 'Kfest Official Cupping Tray',
-            desc: isEs
-              ? 'Bandeja ergonómica de cata profesional para inspección de café verde, pergamino y grano tostado según estándares internacionales.'
-              : 'Ergonomic professional cupping tray for green and roasted bean inspection following SCA protocols.',
-            price: 'S/ 28.00',
-            img: 'images/products/bandeja_cata.png',
-            action: 'prod_bandeja' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? '1 KG (4 x 250g)' : '1 KG (4 x 250g)',
-            tag: isEs ? 'EDICIÓN ANIVERSARIO' : 'ANNIVERSARY EDITION',
-            name: isEs ? 'Cofre Edición Fundo Santa Teresita' : 'Santa Teresita Estate Gift Chest',
-            desc: isEs
-              ? 'Edición de lujo con 4 paquetes de 250g seleccionados de los mejores lotes de altura, empacados con válvula y presentación de regalo.'
-              : 'Deluxe estate gift pack featuring four 250g bags from our best high-elevation microlots with aroma valves.',
-            price: 'S/ 110.00',
-            img: 'images/products/4_paquetes_virtudes.png',
-            action: 'prod_edicion' as WhatsAppAction,
-            isFeatured: false
-          }
-        ];
-      case 'grano':
-      default:
-        return [
-          {
-            weight: isEs ? '250 GRAMOS' : '250 GRAMS',
-            tag: isEs ? 'RESERVA PERSONAL' : 'PERSONAL RESERVE',
-            name: isEs ? '1 Paquete CAFÉ DE ESPECIALIDAD' : '1 Bag SPECIALTY COFFEE',
-            desc: isEs
-              ? 'La medida perfecta para moler en casa justo antes de preparar. Granos enteros con aceites aromáticos intactos y tueste reciente.'
-              : 'The perfect size for fresh home grinding. Whole beans with intact aromatic oils and recent roast date.',
-            price: 'S/ 30.00',
-            img: 'images/products/blend_bolsa.png',
-            action: 'prod_250g' as WhatsAppAction,
-            isFeatured: false
-          },
-          {
-            weight: isEs ? '500 GRAMOS TOTAL' : '500 GRAMS TOTAL',
-            tag: isEs ? 'DÚO ESENCIAL RESERVA' : 'ESSENTIAL RESERVE DUO',
-            name: isEs ? '2 Paquetes CAFÉ DE ESPECIALIDAD' : '2 Bags SPECIALTY COFFEE',
-            desc: isEs
-              ? 'Nuestra presentación insignia en grano entero. Dos bolsas de 250g con válvula desgasificadora: una abierta y la otra perfectamente sellada.'
-              : 'Our flagship whole bean presentation. Two 250g bags with nitrogen aroma valves for supreme shelf freshness.',
-            price: 'S/ 56.00',
-            img: 'images/products/twoproducto.png',
-            action: 'prod_500g' as WhatsAppAction,
-            isFeatured: true
-          },
-          {
-            weight: isEs ? '1 KILOGRAMO TOTAL' : '1 KILOGRAM TOTAL',
-            tag: isEs ? 'COFRE DEGUSTACIÓN · AHORRA S/ 20' : 'TASTING CHEST · SAVE S/ 20',
-            name: isEs ? '4 Paquetes CAFÉ DE ESPECIALIDAD' : '4 Bags SPECIALTY COFFEE',
-            desc: isEs
-              ? 'Pack maestro de 1 kg en grano distribuido en 4 bolsas individuales. Máxima frescura por semanas para verdaderos amantes del café.'
-              : 'Master 1kg whole bean pack across 4 individual bags. Weeks of peak freshness for true coffee aficionados.',
-            price: 'S/ 100.00',
-            img: 'images/products/4_paquetes_virtudes.png',
-            action: 'prod_1kg' as WhatsAppAction,
-            isFeatured: false
-          }
-        ];
-    }
-  }
-
   setCataFormat(format: CataFormat): void {
     this.selectedCataFormat = format;
   }
@@ -891,229 +610,55 @@ export class App implements AfterViewInit, OnDestroy {
 
   // --- FEATURE A: BARISTA CALCULATOR METHODS ---
   setBrewMethod(method: BrewMethod): void {
-    this.selectedBrewMethod = method;
+    if (isBrewMethod(method)) this.selectedBrewMethod = method;
   }
 
-  setBrewCups(cups: number): void {
-    if (cups >= 1 && cups <= 8) {
-      this.brewCups = cups;
-    }
+  setBrewCups(cups: number): void { this.brewCups = normalizePortions(cups); }
+  setBrewCupVolume(volume: number): void { this.brewCupVolume = normalizeCupVolume(volume); }
+
+  setBrewMokaCapacity(capacity: number): void {
+    if (this.brewMokaCapacities.some(c => c.italianCups === capacity)) this.brewMokaCapacity = capacity;
   }
 
-  get currentBrewConfig(): BrewConfig {
-    return BREW_CONFIGS[this.selectedBrewMethod] || BREW_CONFIGS.v60;
+  setBrewConcentrateDose(value: number): void {
+    this.brewConcentrateDose = normalizeConcentrateDose(value);
   }
 
-  get calculatedWater(): number {
-    return this.brewCups * this.currentBrewConfig.waterPerCup;
+  setBrewConcentrateRatio(value: number): void {
+    this.brewConcentrateRatio = normalizeConcentrateRatio(value);
   }
 
-  get calculatedCoffeeGrams(): number {
-    const water = this.calculatedWater;
-    const ratio = this.currentBrewConfig.ratio;
-    return Math.round((water / ratio) * 10) / 10;
-  }
+  get currentBrewConfig(): BrewConfig { return BREW_CONFIGS[this.selectedBrewMethod]; }
+  brewMethodConfig(method: BrewMethod): BrewConfig { return BREW_CONFIGS[method]; }
 
-  getBrewWhatsAppLink(): string {
-    const config = this.currentBrewConfig;
-    const isEs = this.language === 'es';
-    const method = config.name[this.language];
-    const grind = config.grind[this.language];
-    const grams = this.calculatedCoffeeGrams;
-    const water = this.calculatedWater;
-    const cups = this.brewCups;
-
-    const message = isEs
-      ? `Hola Kfest, usé la Calculadora Barista en su web para preparar ${method} (${cups} tazas, ${grams}g café / ${water}ml agua). Quisiera pedir café de especialidad con molienda ${grind}.`
-      : `Hello Kfest, I used your website Barista Calculator for ${method} (${cups} cups, ${grams}g coffee / ${water}ml water). I would like to order specialty coffee ground as ${grind}.`;
-
-    return `https://wa.me/${this.phonePrimary}?text=${encodeURIComponent(message)}`;
-  }
-
-  // --- FEATURE B: COFFEE QUIZ METHODS (CARTA KFEST) ---
-  setQuizCategory(category: CoffeeCategoryKey): void {
-    this.quizCategory = category;
-    this.quizFlavor = 'todos';
-
-    const defaultCoffees: Record<CoffeeCategoryKey, string> = {
-      calientes: 'capuchino',
-      desayunos_combos: 'desayuno_parisino',
-      iced: 'caramel_latte',
-      cold_brew: 'cold_brew_maracuya',
-      frappes: 'frappe_oreo',
-      filtrados: 'mupeco',
-      panaderia_postres: 'croissant_pollo',
-      bar_kfest: 'coffee_sour',
-      virtudes: 'virtud_resiliencia'
-    };
-
-    const targetId = defaultCoffees[category] || this.getFilteredCoffees()[0]?.id || 'capuchino';
-    this.selectQuizCoffee(targetId);
-    this.quizStep = 2;
-  }
-
-  setQuizFlavor(flavor: string): void {
-    this.quizFlavor = flavor;
-    const filtered = this.getFilteredCoffees();
-    if (filtered.length > 0 && !filtered.some(c => c.id === this.selectedCoffeeId)) {
-      this.selectQuizCoffee(filtered[0].id);
-    }
-  }
-
-  selectQuizCoffee(coffeeId: string): void {
-    this.selectedCoffeeId = coffeeId;
-    const coffee = this.getSelectedCoffee();
-    if (coffee.allowsMilk) {
-      this.quizPrepOption = 'leche_entera';
-    } else if (coffee.isPack) {
-      this.quizPrepOption = 'grano';
-    } else {
-      this.quizPrepOption = 'clasica';
-    }
-  }
-
-  setQuizPrepOption(optId: string): void {
-    this.quizPrepOption = optId;
-  }
-
-  setQuizFoodOption(optId: string): void {
-    this.quizFoodOption = optId;
-  }
-
-  setQuizStep(step: number): void {
-    this.quizStep = step;
-  }
-
-  getSelectedCoffee(): CoffeeMenuItem {
-    return this.coffeeMenu.find(c => c.id === this.selectedCoffeeId) || this.coffeeMenu[0];
-  }
-
-  getFilteredCoffees(): CoffeeMenuItem[] {
-    return this.coffeeMenu.filter(c => {
-      const matchCat = c.category === this.quizCategory;
-      if (!matchCat) return false;
-      if (this.quizFlavor === 'todos') return true;
-      return c.flavorTag === this.quizFlavor;
+  get brewResult(): BrewResult {
+    return calculateBrew({
+      method: this.selectedBrewMethod, portions: this.brewCups, cupVolumeMl: this.brewCupVolume,
+      mokaCapacity: this.brewMokaCapacity, concentrateDoseGrams: this.brewConcentrateDose,
+      concentrateRatio: this.brewConcentrateRatio
     });
   }
 
-  getActiveFlavorFilters(): { id: string; label: { es: string; en: string } }[] {
-    return this.quizFlavorFilters[this.quizCategory] || [{ id: 'todos', label: { es: 'Todos', en: 'All' } }];
-  }
+  get calculatedWater(): number | null { return this.brewResult.waterMl; }
+  get calculatedCoffeeGrams(): number | null { return this.brewResult.coffeeGrams; }
 
-  getQuizPrepOptions(): QuizOption[] {
-    const coffee = this.getSelectedCoffee();
-    if (coffee.allowsMilk) return QUIZ_MILK_OPTIONS;
-    if (coffee.isPack) return QUIZ_GRIND_OPTIONS;
-    return QUIZ_SPECIAL_OPTIONS;
-  }
+  brewNumber(value: number): string { return formatBrewNumber(value, this.language); }
+  brewSteps(result: BrewResult): string[] { return brewSteps(result, this.language); }
+  brewWarnings(result: BrewResult): string[] { return brewWarnings(result, this.language); }
+  brewTime(result: BrewResult): string { return brewTime(result, this.language); }
 
-  getQuizFoodOptions(): QuizOption[] {
-    return QUIZ_FOOD_OPTIONS;
-  }
-
-  getSelectedPrepOption(): QuizOption {
-    const options = this.getQuizPrepOptions();
-    return options.find(o => o.id === this.quizPrepOption) || options[0];
-  }
-
-  getSelectedFoodOption(): QuizOption {
-    return QUIZ_FOOD_OPTIONS.find(o => o.id === this.quizFoodOption) || QUIZ_FOOD_OPTIONS[0];
-  }
-
-  getQuizTotalNum(): number {
-    const coffee = this.getSelectedCoffee();
-    const prep = this.getSelectedPrepOption();
-    const food = this.getSelectedFoodOption();
-    return (coffee?.priceNum || 0) + (prep?.price || 0) + (food?.price || 0);
-  }
-
-  getQuizTotalPrice(): string {
-    return `S/ ${this.getQuizTotalNum().toFixed(2)}`;
-  }
-
-  getQuizPrepName(): string {
-    const prep = this.getSelectedPrepOption();
-    return prep ? prep.name[this.language] : '';
-  }
-
-  getQuizFoodName(): string {
-    const food = this.getSelectedFoodOption();
-    return food && food.id !== 'none' ? food.name[this.language] : '';
-  }
-
-  setQuizAnswer(step: number, answer: string): void {
-    if (step === 1) {
-      const catMap: Record<string, CoffeeCategoryKey> = {
-        v60: 'filtrados',
-        prensa: 'filtrados',
-        moka: 'calientes',
-        grano: 'virtudes'
-      };
-      this.setQuizCategory(catMap[answer] || 'calientes');
-    } else if (step === 2) {
-      this.setQuizFlavor(answer);
-      this.quizStep = 3;
-    } else if (step === 3) {
-      this.quizStep = 4;
+  get brewQuantityLabel(): string {
+    const es = this.language === 'es';
+    switch (this.selectedBrewMethod) {
+      case 'espresso': return es ? 'Cantidad de espressos dobles' : 'Number of double espressos';
+      case 'moka': return es ? 'Cantidad de cafeteras completas' : 'Number of full pots';
+      case 'gota': return es ? 'Cantidad de lotes de referencia' : 'Number of reference batches';
+      default: return es ? 'Cantidad de porciones (tazas)' : 'Number of servings (cups)';
     }
   }
 
-  resetQuiz(): void {
-    this.quizStep = 1;
-    this.quizCategory = 'calientes';
-    this.quizFlavor = 'todos';
-    this.selectedCoffeeId = 'capuchino';
-    this.quizPrepOption = 'leche_entera';
-    this.quizFoodOption = 'none';
-  }
-
-  getQuizRecommendation() {
-    const coffee = this.getSelectedCoffee();
-    return {
-      title: coffee.name,
-      package: coffee.categoryLabel,
-      price: this.getQuizTotalPrice(),
-      grind: {
-        es: this.getQuizPrepName(),
-        en: this.getQuizPrepName()
-      },
-      notes: coffee.notes,
-      reason: coffee.desc,
-      img: coffee.img || 'images/products/blend_bolsa.png'
-    };
-  }
-
-  getQuizWhatsAppLink(): string {
-    const isEs = this.language === 'es';
-    const coffee = this.getSelectedCoffee();
-    const totalPrice = this.getQuizTotalPrice();
-    const prepName = this.getQuizPrepName();
-    const foodName = this.getQuizFoodName();
-
-    const message = isEs
-      ? `*¡Hola Kfest! Hice el test "Encuentra tu Café Ideal" en su web.*\n\n` +
-        `Mi café de preferencia es:\n` +
-        `*${coffee.name.es}* (${coffee.price})\n` +
-        `*Categoría:* ${coffee.categoryLabel.es}\n` +
-        `*Notas sensoriales:* ${coffee.notes.es}\n\n` +
-        `*Detalles de mi preferencia:*` +
-        (prepName ? `\n• Preparación / Leche: ${prepName}` : '') +
-        (foodName ? `\n• Acompañamiento: ${foodName}` : '') +
-        `\n• *Total estimado:* ${totalPrice}\n\n` +
-        `¿Me podrían confirmar disponibilidad para preparar / tomar mi pedido? ¡Muchas gracias!`
-      : `*Hello Kfest! I completed the "Find your Ideal Coffee" test on your website.*\n\n` +
-        `My selected coffee match is:\n` +
-        `*${coffee.name.en}* (${coffee.price})\n` +
-        `*Category:* ${coffee.categoryLabel.en}\n` +
-        `*Tasting notes:* ${coffee.notes.en}\n\n` +
-        `*Order details:*` +
-        (prepName ? `\n• Preparation / Milk: ${prepName}` : '') +
-        (foodName ? `\n• Pairing: ${foodName}` : '') +
-        `\n• *Estimated Total:* ${totalPrice}\n\n` +
-        `Could you please confirm availability to take my order? Thank you!`;
-
-    return `https://wa.me/${this.phonePrimary}?text=${encodeURIComponent(message)}`;
+  getBrewWhatsAppLink(): string {
+    return buildBrewWhatsAppLink(this.phonePrimary, this.brewResult, this.language);
   }
 
   // --- FEATURE C: TRACEABILITY METHODS ---
@@ -1374,13 +919,6 @@ export class App implements AfterViewInit, OnDestroy {
         `*Notes:* ${item.notes.en}\n\n` +
         `Could you please confirm availability to take my order? Thank you!`;
     return `https://wa.me/${this.phonePrimary}?text=${encodeURIComponent(msg)}`;
-  }
-
-  customizeFromCatalog(item: CoffeeMenuItem): void {
-    this.quizCategory = item.category;
-    this.selectQuizCoffee(item.id);
-    this.quizStep = 3;
-    this.scrollToSection('quiz');
   }
 
   showToast(message: string): void {

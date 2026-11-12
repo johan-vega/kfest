@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "assets:audit": "node scripts/audit-assets.mjs --check",
     "serve:ssr:kfest-web": "node dist/kfest-web/server/server.mjs"
   },
   "private": true,
