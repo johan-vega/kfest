@@ -45,4 +45,49 @@ describe('App', () => {
     expect(waLink).toContain('Cold%20Brew%20Maracuy');
     expect(waLink).toContain('51918422677');
   });
+
+  it('should filter coffees by search query and tasting notes', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    // Search query test
+    app.searchQuery = 'espresso';
+    const espressoResults = app.getFilteredCatalog();
+    expect(espressoResults.length).toBeGreaterThan(0);
+    expect(espressoResults.every(c => 
+      c.name.es.toLowerCase().includes('espresso') || 
+      c.desc.es.toLowerCase().includes('espresso') || 
+      c.notes.es.toLowerCase().includes('espresso') ||
+      c.flavorTag.toLowerCase().includes('espresso')
+    )).toBe(true);
+
+    // Sensory filter test
+    app.clearSearch();
+    app.setSensoryFilter('chocolate');
+    const chocolateResults = app.getFilteredCatalog();
+    expect(chocolateResults.length).toBeGreaterThan(0);
+    expect(chocolateResults.some(c => 
+      c.notes.es.toLowerCase().includes('chocolate') || 
+      c.notes.es.toLowerCase().includes('cacao')
+    )).toBe(true);
+  });
+
+  it('should toggle favorites and persist count', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    expect(app.favoritesCount).toBe(0);
+
+    const testCoffee = app.coffeeMenu[0];
+    app.toggleFavorite(testCoffee);
+
+    expect(app.isFavorite(testCoffee.id)).toBe(true);
+    expect(app.favoritesCount).toBe(1);
+
+    // Toggle again to remove
+    app.toggleFavorite(testCoffee);
+    expect(app.isFavorite(testCoffee.id)).toBe(false);
+    expect(app.favoritesCount).toBe(0);
+  });
 });
+
